@@ -8,20 +8,6 @@
 }
 
 @font-face {
-  font-family: 'Georgia';
-  src: url("../../assets/fonts/georgia-bold-webfont.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Georgia';
-  src: url("../../assets/fonts/georgia-italic-webfont.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
   font-family: 'Arial';
   src: url("../../assets/fonts/arial-italic-webfont.woff2") format("woff2");
   font-weight: 400;
@@ -402,7 +388,46 @@ h3, h4, h5 {
     transition: all .3s ease;
 }
 
+.donation .content .card:hover {
+    background-color: var(--color-primary-light);
+}
+
 .donation .content .info {
   font: var(--legal-information);
   color: var(--color-dark-m);
+}
+
+.footer {
+  padding-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: url(../../assets/images/background-lines.png), radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%), #211f20;
+}
+
+.contacts-block {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.contacts-block h3 {
+  color: var(--color-light-xl);
+}
+
+.contacts-block a {
+  max-width: 302px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font: var(--h4);
+  letter-spacing:  0.06em;
+  color: var(--color-primary);
+  transition: all .3s ease;
+}
+
+.contacts-block a:hover {
+    color: var(--color-primary-light);
 }
