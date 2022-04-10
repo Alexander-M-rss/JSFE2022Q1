@@ -115,9 +115,9 @@ a {
   display: block;
   margin-top: 10px;
   margin-left: 4px;
-  color: var(--color-light-xl);
   font: var(--logo-subtitle);
   letter-spacing: 0.1em;
+  color: var(--color-light-xl);
 }
 
 .nav {
@@ -133,8 +133,8 @@ a {
 
 .nav-menu-item, .nav-menu-item:visited {
   border-bottom: 3px solid transparent;
-  color: var(--color-dark-s);
   font: var(--paragraph-l);
+  color: var(--color-dark-s);
   transition: all .3s ease;
 }
 
@@ -152,7 +152,7 @@ a {
   padding-top: 180px;
   display: flex;
   justify-content: space-between;
-  background: url(../../assets/images/background-lines.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+  background: url(./../../assets/images/background-lines.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
   background-origin: border-box;
 }
 .not-only .content {
@@ -161,6 +161,10 @@ a {
 
 h2 {
   font: var(--h2);
+}
+
+h3 {
+  font: var(--h3);
 }
 
 .not-only .content .section-title {
@@ -182,37 +186,64 @@ h2 {
 }
 
 .button {
-    height: 52px;
-    padding: 15px 45px;
-    border: 2px solid var(--color-primary);
-    border-radius: 100px;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: : center;
-    outline: none;
-    cursor: pointer;
-    width: max-content;
-    transition: all .3s ease;
+  height: 52px;
+  padding: 15px 45px;
+  border: 2px solid var(--color-primary);
+  border-radius: 100px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: : center;
+  outline: none;
+  cursor: pointer;
+  width: max-content;
+  transition: all .3s ease;
 }
 
 .button span {
-    font: var(--button);
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    color: var(--color-dark-3xl);
-    transition: all .3s ease;
+  font: var(--button);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--color-dark-3xl);
+  transition: all .3s ease;
 }
 
 .button:not(:disabled):hover {
-    background-color: var(--color-primary-light);
-    border-color: var(--color-primary-light);
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
 }
 
 .button-primary {
-    background-color: var(--color-primary);
+  background-color: var(--color-primary);
 }
 
 .not-only .content .button-primary {
   width: 207px;
+}
+
+.about {
+  display: flex;
+  padding-top: 80px;
+  padding-bottom: 100px;
+  justify-content: center;
+  gap: 120px;
+  background-color: var(--color-light-xl);
+}
+
+.about .content {
+  width: 430px;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.about .content .section-title {
+  letter-spacing: 0.06em;
+  color: var(--color-dark-l);
+}
+
+.about .content .section-text {
+  font: var(--paragraph-l);
+  color: var(--color-dark-xl);
 }
