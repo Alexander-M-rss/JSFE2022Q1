@@ -41,7 +41,7 @@
   --h3: 400 35px/45px var(--georgia);
   --h4: 400 20px/23px var(--georgia);
   --h5: 400 15px/17px var(--georgia);
-  --button: 400 17px/22px var(--georgia);
+  --button: 400 17px/22.1px var(--georgia);
 }
 
 
@@ -91,7 +91,6 @@ h3, h4, h5 {
 }
 
 .header {
-  background-color: var(--color-light-xl);
   position: sticky;
   top: 0px;
   width: 100vw;
@@ -101,6 +100,7 @@ h3, h4, h5 {
   min-height: 120px;
   display: flex;
   align-items: center;
+  background-color: var(--color-light-xl);
 }
 
 a {
@@ -109,6 +109,7 @@ a {
 }
 
 .logo-title {
+  padding-top: 2px;
   font: var(--logo-title);
   letter-spacing: 0.06em;
   color: var(--color-dark-l);
@@ -116,8 +117,8 @@ a {
 
 .logo-subtitle {
   display: block;
-  margin-top: 10px;
-  margin-left: 4px;
+  padding-top: 8px;
+  padding-left: 4px;
   font: var(--logo-subtitle);
   letter-spacing: 0.1em;
   color: var(--color-dark-3xl);
@@ -128,6 +129,7 @@ a {
 }
 
 .nav-menu {
+  padding-bottom: 1px;
   display: flex;
   justify-content: space-between;
   gap: 35px;
@@ -151,6 +153,121 @@ a {
   cursor: default;
 }
 
+.button {
+  height: 52px;
+  padding: 15px 45px;
+  border: 2px solid var(--color-primary);
+  border-radius: 100px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  width: max-content;
+  transition: all .3s ease;
+}
+
+.button span {
+  font: var(--button);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--color-dark-3xl);
+  transition: all .3s ease;
+}
+
+.button:not(:disabled):not([class~="button-active"]):hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+}
+
+.button-primary {
+  background-color: var(--color-primary);
+}
+
+.button-arrow {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+}
+
+.button-active {
+  background-color: var(--color-primary);
+  cursor: default;
+}
+
+.button:disabled {
+  background-color: transparent;
+  border-color: var(--color-dark-s);
+  cursor: default;
+}
+
+.button:disabled span {
+  color: var(--color-dark-s);
+}
+
+.our-friends {
+  padding-top: 82px;
+  padding-bottom: 98px;
+  display: flex;
+  flex-flow: column;
+  gap: 45px;
+  background-color: var(--color-light-l);
+}
+
+.our-friends .section-title {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.our-friends .content {
+  padding: 13px 0 14px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 29px 40px;
+}
+
+.card {
+  width: 100%;
+  max-width: 270px;
+  background-color: var(--color-light-s);
+  border-radius: 9px;
+  cursor: pointer;
+  text-align: center;
+  transition: all .3s ease;
+}
+
+.card h4{
+  padding-top: 25px;
+}
+
+.card .button {
+  margin: 30px auto;
+  max-width: 187px;
+}
+
+.card:hover {
+  background-color: var(--color-light-xl);
+  box-shadow: 0 2px 35px 14px rgba(13, 13, 13, 0.04);
+}
+
+.card:hover .button {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+}
+
+.our-friends .navigation {
+  padding-top: 2px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.our-friends .navigation .button-arrow span {
+  font: var(--h4);
+}
+
 .footer {
   padding-top: 40px;
   display: flex;
@@ -160,7 +277,7 @@ a {
 }
 
 .contacts-block {
-  padding-top: 16px;
+  padding-top: 18px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -183,5 +300,5 @@ a {
 }
 
 .contacts-block a:hover {
-    color: var(--color-primary-light);
+  color: var(--color-primary-light);
 }

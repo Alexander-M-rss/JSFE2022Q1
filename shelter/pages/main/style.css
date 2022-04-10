@@ -191,7 +191,7 @@ h3, h4, h5 {
   background-color: transparent;
   display: flex;
   align-items: center;
-  justify-content: : center;
+  justify-content: center;
   outline: none;
   cursor: pointer;
   width: max-content;
@@ -221,11 +221,6 @@ h3, h4, h5 {
   padding: 0;
 }
 
-.button-arrow svg {
-  display: block;
-  margin: 0 auto;
-}
-
 .slider .button-arrow:last-child {
   transform: rotate(180deg);
 }
@@ -251,17 +246,12 @@ h3, h4, h5 {
   gap: 25px;
 }
 
-/* .about .content .section-title {
-  letter-spacing: 0.06em;
-  color: var(--color-dark-l);
-} */
-
 .about .content .section-text {
   font: var(--paragraph-l);
   color: var(--color-dark-xl);
 }
 
-.pets {
+.our-friends {
   padding-top: 80px;
   padding-bottom: 100px;
   display: flex;
@@ -272,7 +262,7 @@ h3, h4, h5 {
   background-color: var(--color-light-l);
 }
 
-.pets .section-title {
+.our-friends .section-title {
   text-align: center;
 }
 
@@ -288,7 +278,7 @@ h3, h4, h5 {
   gap: 90px;
 }
 
-.slider-item {
+.card {
   width: 100%;
   max-width: 270px;
   background-color: var(--color-light-s);
@@ -298,25 +288,25 @@ h3, h4, h5 {
   transition: all .3s ease;
 }
 
-.slider-item h4{
+.card h4{
   padding-top: 25px;
 }
 
-.slider-item .button {
+.card .button {
   margin: 30px auto;
 }
 
-.slider-item:hover {
+.card:hover {
   background-color: var(--color-light-xl);
   box-shadow: 0 2px 35px 14px rgba(13, 13, 13, 0.04);
 }
 
-.slider-item:hover .button {
-    background-color: var(--color-primary-light);
-    border-color: var(--color-primary-light);
+.card:hover .button {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
 }
 
-.pets .button-primary {
+.our-friends .button-primary {
   width: 261px;
 }
 
@@ -353,7 +343,7 @@ h3, h4, h5 {
   padding-top: 30px;
 }
 
-.donation {
+.in-addition {
   padding-top: 80px;
   padding-bottom: 100px;
   display: flex;
@@ -363,36 +353,36 @@ h3, h4, h5 {
   background-color: var(--color-light-l);
 }
 
-.donation .image {
+.in-addition .image {
   display: block;
   padding-top: 11px;
 }
 
-.donation .content {
+.in-addition .content {
   display: flex;
   flex-direction: column;
   width: 380px;
   gap: 20px;
 }
 
-.donation .content .card {
-    background-color: var(--color-primary);
-    border-radius: 9px;
-    color: var(--color-dark-l);
-    display: flex;
-    align-items: center;
-    width: min-content;
-    padding: 10px 15px;
-    gap: 15px;
-    white-space: nowrap;
-    transition: all .3s ease;
+.in-addition .content .bank-card {
+  background-color: var(--color-primary);
+  border-radius: 9px;
+  color: var(--color-dark-l);
+  display: flex;
+  align-items: center;
+  width: min-content;
+  padding: 10px 15px;
+  gap: 15px;
+  white-space: nowrap;
+  transition: all .3s ease;
 }
 
-.donation .content .card:hover {
-    background-color: var(--color-primary-light);
+.in-addition .content .bank-card:hover {
+  background-color: var(--color-primary-light);
 }
 
-.donation .content .info {
+.in-addition .content .info {
   font: var(--legal-information);
   color: var(--color-dark-m);
 }
@@ -429,5 +419,5 @@ h3, h4, h5 {
 }
 
 .contacts-block a:hover {
-    color: var(--color-primary-light);
+  color: var(--color-primary-light);
 }
