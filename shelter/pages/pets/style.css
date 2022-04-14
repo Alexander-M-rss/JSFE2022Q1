@@ -82,7 +82,7 @@ h3, h4, h5 {
 }
 
 .container {
-  width: 1280px;
+  max-width: 1280px;
   margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
@@ -222,6 +222,7 @@ a {
   padding: 13px 0 14px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
   gap: 29px 40px;
 }
 
@@ -299,4 +300,38 @@ a {
 
 .contacts-block a:hover {
   color: var(--color-primary-light);
+}
+
+@media (max-width: 1279px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .our-friends {
+    padding: 81px 12.23vw 75px;;
+    gap: 30px;
+  }
+
+  .our-friends .content {
+    padding-top: 0;
+    padding-bottom: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 29px 40px;
+  }
+
+  .card:last-child, .card:nth-last-child(2) {
+    display: none;
+  }
+
+  .footer {
+    padding: 30px 8.3vw 0;
+    justify-content: space-around;
+    gap: 65px 7.8vw;
+  }
+
+  .contacts-block {
+    padding: 0;
+  }
 }
