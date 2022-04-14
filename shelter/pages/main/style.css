@@ -495,7 +495,8 @@ h3, h4, h5 {
   }
 
   .slider .content {
-    gap: 5.2vw;
+    /* gap: 5.2vw; */
+    gap: calc((100vw - 704px)/3);
   }
 
   .card:last-child {
@@ -536,6 +537,11 @@ h3, h4, h5 {
 
 }
 
+@media (max-width: 834px){
+  .slider .content {
+    gap: 5.2vw;
+  }
+}
 /* @media (max-width: 900px) {
 .not-only {
     flex-wrap: wrap;
