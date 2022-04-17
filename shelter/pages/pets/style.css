@@ -36,6 +36,7 @@
   --logo-subtitle: 400 13px/15px var(--arial);
   --paragraph-l: 400 15px/24px var(--arial);
   --h2: 400 44px/57px var(--georgia);
+  --h3-mobile: 400 25px/32px var(--georgia);
   --h3: 400 35px/45px var(--georgia);
   --h4: 400 20px/23px var(--georgia);
   --h5: 400 15px/17px var(--georgia);
@@ -82,7 +83,8 @@ h3, h4, h5 {
 }
 
 .container {
-  width: 1280px;
+  max-width: 1280px;
+  min-width: 320px;
   margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
@@ -95,7 +97,7 @@ h3, h4, h5 {
 }
 
 .header .container {
-  min-height: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   background-color: var(--color-light-xl);
@@ -149,6 +151,10 @@ a {
   border-color: var(--color-primary);
   color: var(--color-dark-3xl);
   cursor: default;
+}
+
+.burger-menu-icon {
+  display: none;
 }
 
 .button {
@@ -206,7 +212,7 @@ a {
 
 .our-friends {
   padding-top: 82px;
-  padding-bottom: 98px;
+  padding-bottom: 100px;
   display: flex;
   flex-flow: column;
   gap: 45px;
@@ -214,14 +220,16 @@ a {
 }
 
 .our-friends .section-title {
-  text-align: center;
   margin: 0 auto;
+  padding-top: 1px;
+  text-align: center;
 }
 
 .our-friends .content {
-  padding: 13px 0 14px 0;
+  padding: 12px 0 14px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
   gap: 29px 40px;
 }
 
@@ -255,7 +263,6 @@ a {
 }
 
 .our-friends .navigation {
-  padding-top: 2px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -275,6 +282,7 @@ a {
 }
 
 .contacts-block {
+  max-width: 302px;
   padding-top: 18px;
   display: flex;
   flex-direction: column;
@@ -282,11 +290,11 @@ a {
 }
 
 .contacts-block h3 {
+  max-width: 279px;
   color: var(--color-light-xl);
 }
 
 .contacts-block a {
-  max-width: 302px;
   height: 32px;
   display: flex;
   align-items: center;
@@ -300,3 +308,143 @@ a {
 .contacts-block a:hover {
   color: var(--color-primary-light);
 }
+
+@media (max-width: 1279px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .our-friends {
+    padding: 80px 12.23vw 77px;
+    gap: 30px;
+  }
+
+  .our-friends .content {
+    margin-top: -1px;
+    padding-top: 0;
+    padding-bottom: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 29px 40px;
+  }
+
+  .card:last-child, .card:nth-last-child(2) {
+    display: none;
+  }
+
+  .footer {
+    padding: 32px 8.3vw 0;
+    justify-content: space-around;
+    gap: 65px 7.7vw;
+  }
+
+  .contacts-block {
+    padding: 0;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .header .container {
+    justify-content: space-between;
+    padding-right: 53px;
+    gap: 41px;
+  }
+
+  .header .logo {
+    margin-left: auto;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .burger-menu-icon {
+    display: block;
+  }
+
+  .burger-menu-icon .line {
+    width: 30px;
+    height: 2px;
+    display: block;
+    background-color: black;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .burger-menu-icon .line:nth-child(2) {
+    margin: 8px auto;
+  }
+
+  .burger-menu-icon.is-active{
+    transform: rotate(90deg);
+  }
+
+  h3 {
+    font: var(--h3-mobile);
+    text-align: center;
+  }
+
+  .our-friends {
+    padding-top: 42px;
+    padding-bottom: 41px;
+    gap: 42px;
+  }
+
+  .our-friends .section-title {
+    padding-top: 1px;
+  }
+
+  .our-friends .content {
+    margin-top: -1px;
+    padding-bottom: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .card:nth-last-child(3), .card:nth-last-child(4), .card:nth-last-child(5) {
+    display: none;
+  }
+
+  .our-friends .navigation {
+    padding-top: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    /* gap: 10px; */
+    gap: 3.125vw;
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    justify-content: center;
+    gap: 41px;
+  }
+
+  .contacts-block h3 {
+    margin: 0 auto;
+  }
+
+  .contacts:nth-child(2) {
+    gap: 47px;
+  }
+
+  .contacts-block:first-child a {
+    margin: 0 auto;
+  }
+
+  .contacts-block a {
+    height: auto;
+  }
+
+  .footer .pet-img {
+    margin: 0 auto;
+    width: 260px;
+    height: 269px;
+  }
