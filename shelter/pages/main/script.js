@@ -3,6 +3,7 @@ const burgerIcon = document.querySelector('.burger-menu-icon');
 const menu = document.querySelector('.nav');
 const body = document.querySelector('body');
 
+
 const toggleNavigation = () => {
   menu.classList.toggle('active');
   burgerIcon.classList.toggle('active');
@@ -18,6 +19,6 @@ menu.addEventListener('click', () => {
 });
 
 blackout.addEventListener('click', () => {
-  if (menu.classList.contains('active'))
+  // if (menu.classList.contains('active'))
     toggleNavigation();
 });

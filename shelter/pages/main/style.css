@@ -36,6 +36,7 @@
   --logo-title: 400 32px/35px var(--georgia);
   --logo-subtitle: 400 13px/15px var(--arial);
   --paragraph-l: 400 15px/24px var(--arial);
+  --paragraph-mobile-menu: 400 32px/51px var(--arial);
   --h2: 400 44px/57px var(--georgia);
   --h3-mobile: 400 25px/32px var(--georgia);
   --h3: 400 35px/45px var(--georgia);
@@ -59,6 +60,11 @@ html {
 body {
   width: 100vw;
   background-color: var(--color-light-xl);
+}
+
+.wrapper {
+  position: relative;
+  overflow-x: hidden;
 }
 
 .container {
@@ -555,10 +561,30 @@ h3, h4, h5 {
 
 
 @media (max-width: 767px) {
+  .no-scroll {
+    overflow-y: hidden;
+  }
 
   .container {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .blackout {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(41, 41, 41, 0.6);
+    opacity: 0;
+    transition: all .5s ease;
+    z-index: -5;
+  }
+
+  .blackout.active {
+    opacity: 1;
+    z-index: 5;
   }
 
   .header {
@@ -573,14 +599,55 @@ h3, h4, h5 {
 
   .header .logo {
     margin-left: auto;
+    z-index: 15;
   }
 
   .nav {
-    display: none;
+    width: 320px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* padding: 90px 10px 90px; */
+    padding: 120px 10px 120px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-dark-3xl);
+    transform: translateX(100%);
+    z-index: 10;
+    transition: transform .5s ease;
+  }
+
+  .nav.active {
+    transform: translateX(0);
+  }
+
+  .nav-menu {
+    width: 300px;
+    max-height: calc(100vh - 240px);
+    margin: auto 0;
+    padding-top: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+    overflow-y: auto;
+  }
+
+  .nav-menu-item, .nav-menu-item:visited {
+    border-bottom: none;
+    font: var(--paragraph-mobile-menu);
+  }
+
+  .nav-menu-item.active {
+    border-bottom: 3px solid;
+    border-color: var(--color-primary);
   }
 
   .burger-menu-icon {
     display: block;
+    transition: all 0.5s ease-in-out;
+    z-index: 15;
   }
 
   .burger-menu-icon .line {
@@ -588,14 +655,13 @@ h3, h4, h5 {
     height: 2px;
     display: block;
     background-color: var(--color-primary);
-    transition: all 0.3s ease-in-out;
   }
 
   .burger-menu-icon .line:nth-child(2) {
     margin: 8px auto;
   }
 
-  .burger-menu-icon.is-active{
+  .burger-menu-icon.active{
     transform: rotate(90deg);
   }
 
