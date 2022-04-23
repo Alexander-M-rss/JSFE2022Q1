@@ -288,14 +288,45 @@ h3, h4, h5 {
   align-items: center;
 }
 
-.slider .content {
+.slider-content {
+  width: 990px;
+  overflow: hidden;
+}
+
+.slider-items {
+  position: relative;
+  display: flex;
+  gap: 90px;
+  left: -1080px;
+}
+
+.slider-item {
   display: flex;
   gap: 90px;
 }
 
+@keyframes move-right {
+  from {left: -1080px;}
+  to {left: -2160px;}
+}
+
+.transition-right {
+  animation-name: move-right;
+  animation-duration: 1.5s;
+}
+
+@keyframes move-left {
+  from {left: -1080px;}
+  to {left: 0px;}
+}
+
+.transition-left {
+  animation-name: move-left;
+  animation-duration: 1.5s;
+}
+
 .card {
-  width: 100%;
-  max-width: 270px;
+  width: 270px;
   background-color: var(--color-light-s);
   border-radius: 9px;
   cursor: pointer;
@@ -502,18 +533,54 @@ h3, h4, h5 {
   .about .content .section-text:last-child {
     padding-top: 2px;
   }
+
   .about img {
     margin: 0 auto;
     width: 300px;
     height: 408px;
   }
 
-  .slider .content {
-    /* gap: 5.2vw; */
-    gap: calc((100vw - 704px)/3);
+  .slider {
+    gap: 12px;
+    justify-content: center;
   }
 
-  .card:last-child {
+  .slider-content {
+    width: 580px;
+  }
+
+  .slider-items {
+    position: relative;
+    display: flex;
+    gap: 40px;
+    left: -620px;
+  }
+
+  @keyframes move-right {
+    from {left: -620px;}
+    to {left: -1240px;}
+  }
+
+  .transition-right {
+    animation-name: move-right;
+    animation-duration: 1s;
+  }
+
+  @keyframes move-left {
+    from {left: -620px;}
+    to {left: 0px;}
+  }
+
+  .transition-left {
+    animation-name: move-left;
+    animation-duration: 1s;
+  }
+
+  .slider-item {
+    gap: 40px;
+  }
+
+  .slider-item .card:nth-child(3) {
     display: none;
   }
 
@@ -552,13 +619,6 @@ h3, h4, h5 {
     margin: 0 auto;
   }
 }
-
-@media (max-width: 834px){
-  .slider .content {
-    gap: 5.2vw;
-  }
-}
-
 
 @media (max-width: 767px) {
   .no-scroll {
@@ -749,7 +809,8 @@ h3, h4, h5 {
     justify-items: center;
   }
 
-  .slider .content {
+  .slider-content {
+    width: 270px;
     grid-column: 1 / span 2;
     grid-row: 1;
   }
@@ -762,7 +823,29 @@ h3, h4, h5 {
     justify-self: start;
   }
 
-  .card:nth-last-child(2) {
+  .slider-items {
+    left: -310px;
+  }
+
+  @keyframes move-right {
+    from {left: -310px;}
+    to {left: -620px;}
+  }
+
+  .transition-right {
+    animation-duration: .5s;
+  }
+
+  @keyframes move-left {
+    from {left: -310px;}
+    to {left: 0px;}
+  }
+
+  .transition-left {
+    animation-duration: .5s;
+  }
+
+  .slider-item .card:nth-child(2) {
     display: none;
   }
 
