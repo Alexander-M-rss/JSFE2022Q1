@@ -667,19 +667,18 @@ h3, h4, h5 {
     height: 100vh;
     position: fixed;
     top: 0;
-    right: 0;
+    right: -320px;
     /* padding: 90px 10px 90px; */
     padding: 120px 10px 120px;
     display: flex;
     justify-content: center;
     background-color: var(--color-dark-3xl);
-    transform: translateX(100%);
     z-index: 10;
     transition: transform .5s ease;
   }
 
   .nav.active {
-    transform: translateX(0);
+    transform: translateX(-100%);
   }
 
   .nav-menu {

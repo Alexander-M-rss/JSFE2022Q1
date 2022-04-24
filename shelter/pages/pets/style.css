@@ -94,6 +94,7 @@ h3, h4, h5 {
   position: sticky;
   top: 0px;
   width: 100vw;
+  z-index: 1;
 }
 
 .header .container {
@@ -180,7 +181,7 @@ a {
   transition: all .3s ease;
 }
 
-.button:not(:disabled):not([class~="button-active"]):hover {
+.button:not([class~="button-disabled"]):not([class~="button-active"]):hover {
   background-color: var(--color-primary-light);
   border-color: var(--color-primary-light);
 }
@@ -200,13 +201,13 @@ a {
   cursor: default;
 }
 
-.button:disabled {
+.button-disabled {
   background-color: transparent;
   border-color: var(--color-dark-s);
   cursor: default;
 }
 
-.button:disabled span {
+.button-disabled span {
   color: var(--color-dark-s);
 }
 
@@ -225,7 +226,39 @@ a {
   text-align: center;
 }
 
-.our-friends .content {
+.our-friends .content{
+  width: 1200px;
+  overflow: hidden;
+}
+
+.content-items{
+  position: relative;
+  display: flex;
+  gap: 40px;
+  left: -1240px;
+}
+
+@keyframes move-right {
+  from {left: -1240px;}
+  to {left: -2480px;}
+}
+
+.transition-right {
+  animation-name: move-right;
+  animation-duration: 1.5s;
+}
+
+@keyframes move-left {
+  from {left: -1240px;}
+  to {left: 0px;}
+}
+
+.transition-left {
+  animation-name: move-left;
+  animation-duration: 1.5s;
+}
+
+.content-item {
   padding: 12px 0 14px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -234,8 +267,7 @@ a {
 }
 
 .card {
-  width: 100%;
-  max-width: 270px;
+  width: 270px;
   background-color: var(--color-light-s);
   border-radius: 9px;
   cursor: pointer;
@@ -317,10 +349,39 @@ a {
 
   .our-friends {
     padding: 80px 12.23vw 77px;
+    align-items: center;
     gap: 30px;
   }
 
-  .our-friends .content {
+  .our-friends .content{
+    width: 580px;
+  }
+
+  .content-items{
+    left: -620px;
+  }
+
+  @keyframes move-right {
+    from {left: -620px;}
+    to {left: -1240px;}
+  }
+
+  .transition-right {
+    animation-name: move-right;
+    animation-duration: .75s;
+  }
+
+  @keyframes move-left {
+    from {left: -620px;}
+    to {left: 0px;}
+  }
+
+  .transition-left {
+    animation-name: move-left;
+    animation-duration: .75s;
+  }
+
+  .content-item {
     margin-top: -1px;
     padding-top: 0;
     padding-bottom: 8px;
@@ -329,7 +390,7 @@ a {
     gap: 29px 40px;
   }
 
-  .card:last-child, .card:nth-last-child(2) {
+  .content-item  .card:last-child, .card:nth-last-child(2) {
     display: none;
   }
 
@@ -355,20 +416,23 @@ a {
     padding-right: 10px;
   }
 
+
+
   .blackout {
     display: block;
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     top: 0;
     left: 0;
     background-color: rgba(41, 41, 41, 0.6);
     opacity: 0;
-    transition: all .5s ease;
+    transition: opacity .5s ease;
     z-index: -5;
   }
 
   .blackout.active {
+    height: 100vh;
     opacity: 1;
     z-index: 5;
   }
@@ -390,19 +454,17 @@ a {
     height: 100vh;
     position: fixed;
     top: 0;
-    right: 0;
+    right: -320px;
     padding: 120px 10px 120px;
     display: flex;
     justify-content: center;
     background-color: var(--color-light-xl);
-    transform: translateX(100%);
     z-index: 10;
     transition: transform .5s ease;
-
   }
 
   .nav.active {
-    transform: translateX(0);
+    transform: translateX(-100%);
   }
 
   .nav-menu {
@@ -463,13 +525,41 @@ a {
     padding-top: 1px;
   }
 
-  .our-friends .content {
+  .our-friends .content{
+    width: 270px;
+  }
+
+  .content-items{
+    left: -310px;
+  }
+
+  @keyframes move-right {
+    from {left: -310px;}
+    to {left: -620px;}
+  }
+
+  .transition-right {
+    animation-name: move-right;
+    animation-duration: .5s;
+  }
+
+  @keyframes move-left {
+    from {left: -310px;}
+    to {left: 0px;}
+  }
+
+  .transition-left {
+    animation-name: move-left;
+    animation-duration: .5s;
+  }
+
+  .content-item {
     margin-top: -1px;
     padding-bottom: 0;
     grid-template-columns: 1fr;
   }
 
-  .card:nth-last-child(3), .card:nth-last-child(4), .card:nth-last-child(5) {
+  .content-item .card:nth-last-child(3), .card:nth-last-child(4), .card:nth-last-child(5) {
     display: none;
   }
 
