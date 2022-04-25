@@ -749,6 +749,7 @@ h3, h4, h5 {
     margin: 0 auto;
   }
 
+  shelter-part3
   .pop-up-image {
     height: 350px;
   }
@@ -803,12 +804,11 @@ h3, h4, h5 {
     opacity: 1;
     visibility: visible;
   }
-
+  
   .container {
     padding-left: 10px;
     padding-right: 10px;
   }
-
 
   .header {
     top: 30px;
