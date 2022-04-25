@@ -749,6 +749,10 @@ h3, h4, h5 {
     margin: 0 auto;
   }
 
+  shelter-part3
+  .pop-up-image {
+    height: 350px;
+  }
 
   .pop-up-image img {
     width: 350px;
@@ -758,7 +762,6 @@ h3, h4, h5 {
     padding-left: 11px;
     padding-top: 11px;
     padding-right: 9px;
-    /* min-width: 280px; */
   }
 
   .pop-up-text {
@@ -806,7 +809,6 @@ h3, h4, h5 {
     padding-left: 10px;
     padding-right: 10px;
   }
-
 
   .header {
     top: 30px;
