@@ -28,11 +28,12 @@
           <li><a class="nav-menu-item" href="#contacts">Contacts</a></li>
         </ul>
       </nav>
-      <div class="burger-menu-icon">
+
+      <a class="burger-menu-icon" href="#">
         <span class="burger-menu-icon line"></span>
         <span class="burger-menu-icon line"></span>
         <span class="burger-menu-line line"></span>
-      </div>
+      </a>
     </div>
   </header>
   <main>
@@ -73,41 +74,103 @@
     <section id="pets" class="container our-friends">
       <h3 class="section-title">Our friends who<br>are looking for a house</h3>
       <div class="slider">
-        <button class="button button-arrow">
+        <button class="button button-arrow" id="button-left">
           <svg width="14" height="6" viewBox="0 0 14 6" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 2V4H3V6L0 3L3 0V2H14Z" fill="currentColor"></path>
           </svg>
         </button>
-        <div class="content">
-          <div class="card">
-            <div class="photo">
-               <img src="../../assets/images/pets-katrine.png" alt="pet">
+        <div class="slider-content">
+          <div class="slider-items">
+            <div class="slider-item left">
+              <div class="card" data-pid="1">
+              <div class="photo">
+                 <img src="../../assets/images/sophia.png" alt="pet">
+              </div>
+              <h4 class="name">Sophia</h4>
+              <button class="button" >
+                <span>Learn more</span>
+              </button>
             </div>
-            <h4 class="name">Katrine</h4>
-            <button class="button">
-              <span>Learn more</span>
-            </button>
-          </div>
-          <div class="card">
-            <div class="photo">
-               <img src="../../assets/images/pets-jennifer.png" alt="pet">
+              <div class="card" data-pid="3">
+              <div class="photo">
+                 <img src="../../assets/images/scarlett.png" alt="pet">
+              </div>
+              <h4 class="name">Scarlett</h4>
+              <button class="button">
+                <span>Learn more</span>
+              </button>
             </div>
-            <h4 class="name">Jennifer</h4>
-            <button class="button">
-              <span>Learn more</span>
-            </button>
-          </div>
-          <div class="card">
-            <div class="photo">
-               <img src="../../assets/images/pets-woody.png" alt="pet">
+              <div class="card" data-pid="5">
+              <div class="photo">
+               <img src="../../assets/images/timmy.png" alt="pet">
+              </div>
+              <h4 class="name">Timmy</h4>
+              <button class="button">
+                <span>Learn more</span>
+              </button>
             </div>
-            <h4 class="name">Woody</h4>
-            <button class="button">
-              <span>Learn more</span>
-            </button>
-          </div>
+            </div>
+            <div class="slider-item center">
+              <div class="card" data-pid="4">
+              <div class="photo">
+                 <img src="../../assets/images/katrine.png" alt="pet">
+              </div>
+              <h4 class="name">Katrine</h4>
+              <button class="button" >
+                <span>Learn more</span>
+              </button>
+            </div>
+              <div class="card" data-pid="0">
+              <div class="photo">
+                 <img src="../../assets/images/jennifer.png" alt="pet">
+              </div>
+              <h4 class="name">Jennifer</h4>
+              <button class="button">
+                <span>Learn more</span>
+              </button>
+            </div>
+              <div class="card" data-pid="2">
+              <div class="photo">
+               <img src="../../assets/images/woody.png" alt="pet">
+              </div>
+              <h4 class="name">Woody</h4>
+              <button class="button">
+                <span>Learn more</span>
+              </button>
+            </div>
+            </div>
+            <div class="slider-item right">
+              <div class="card" data-pid="6">
+              <div class="photo">
+                 <img src="../../assets/images/freddie.png" alt="pet">
+              </div>
+              <h4 class="name">Freddie</h4>
+              <button class="button" >
+                <span>Learn more</span>
+              </button>
+            </div>
+              <div class="card" data-pid="7">
+              <div class="photo">
+                 <img src="../../assets/images/charly.png" alt="pet">
+              </div>
+              <h4 class="name">Charly</h4>
+              <button class="button">
+                <span>Learn more</span>
+              </button>
+            </div>
+              <div class="card" data-pid="1">
+              <div class="photo">
+               <img src="../../assets/images/woody.png" alt="pet">
+              </div>
+              <h4 class="name">Woody</h4>
+              <button class="button">
+                <span>Learn more</span>
+              </button>
+            </div>
+            </div>
         </div>
-        <button class="button button-arrow">
+        </div>
+        <button class="button button-arrow" id="button-right">
           <svg width="14" height="6" viewBox="0 0 14 6" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 2V4H3V6L0 3L3 0V2H14Z" fill="currentColor"></path>
           </svg>
@@ -201,6 +264,35 @@
     </div>
     <img class="pet-img" src="../../assets/images/footer-puppy.png" alt="pet">
   </footer>
+  <div class="blackout"></div>
+  <div class="modal">
+    <div class="modal-overlay">
+      <div class="pop-up">
+        <div class="pop-up-image">
+          <img src="../../assets/images/jennifer.png">
+        </div>
+        <div class="pop-up-content">
+          <h3 class="pop-up-name">Jennifer</h3>
+          <h4 class="pop-up-type">Dog - Labrador</h4>
+          <h5 class="pop-up-text">Jennifer is a sweet 2 months old Labrador that is patiently waiting to find a new forever home. This girl really enjoys being able to go outside to run and play, but won't hesitate to play up a storm in the house if she has all of her favorite toys.</h5>
+          <div class="pop-up-description">
+            <ul>
+              <li><span class="pop-up-description-item">Age: </span><span class="pop-up-age item-text">2 months</span></li>
+              <li><span class="pop-up-description-item">Inoculations: </span><span class="pop-up-inoculations item-text">none</span></li>
+          	  <li><span class="pop-up-description-item">Diseases: </span><span class="pop-up-diseases item-text">none</span></li>
+          	  <li><span class="pop-up-description-item">Parasites: </span><span class="pop-up-parasites item-text">none</span></li>
+            </ul>
+          </div>
+        </div>
+        <button class="button button-arrow pop-up-close-button" id="close-button">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.42618 6.00003L11.7046 1.72158C12.0985 1.32775 12.0985 0.689213 11.7046 0.295433C11.3108 -0.0984027 10.6723 -0.0984027 10.2785 0.295433L5.99998 4.57394L1.72148 0.295377C1.32765 -0.098459 0.68917 -0.098459 0.295334 0.295377C-0.0984448 0.689213 -0.0984448 1.32775 0.295334 1.72153L4.57383 5.99997L0.295334 10.2785C-0.0984448 10.6723 -0.0984448 11.3108 0.295334 11.7046C0.68917 12.0985 1.32765 12.0985 1.72148 11.7046L5.99998 7.42612L10.2785 11.7046C10.6723 12.0985 11.3108 12.0985 11.7046 11.7046C12.0985 11.3108 12.0985 10.6723 11.7046 10.2785L7.42618 6.00003Z" fill="#292929"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./script.js"></script>
 </body>
 
 </html>
