@@ -12,7 +12,7 @@ const contentItemLeftCards = document.querySelectorAll('.content-item.left .card
 const contentItemLeftNames = document.querySelectorAll('.content-item.left .name');
 const contentItemLeftPhotos = document.querySelectorAll('.content-item.left .photo');
 const CONTENT_ITEM_CENTER = document.querySelector('.content-item.center');
-const contentItemCenterCards = document.querySelectorAll('.content-item.center .card');
+let contentItemCenterCards = document.querySelectorAll('.content-item.center .card');
 const contentItemCenterNames = document.querySelectorAll('.content-item.center .name');
 const contentItemCenterPhotos = document.querySelectorAll('.content-item.center .photo');
 const CONTENT_ITEM_RIGHT = document.querySelector('.content-item.right');
@@ -24,6 +24,17 @@ const BUTTON_LEFT = document.querySelector('#previous-page-button');
 const BUTTON_RIGHT = document.querySelector('#next-page-button');
 const BUTTON_LAST = document.querySelector('#last-page-button');
 const CURRENT_PAGE = document.querySelector('#current-page');
+const MODAL_WINDOW = document.querySelector('.modal-overlay');
+const MODAL_CLOSE_BUTTON = document.querySelector('.pop-up-close-button');
+const POP_UP_IMAGE = document.querySelector('.pop-up-image');
+const POP_UP_NAME = document.querySelector('.pop-up-name');
+const POP_UP_TYPE = document.querySelector('.pop-up-type');
+const POP_UP_TEXT = document.querySelector('.pop-up-text');
+const POP_UP_AGE = document.querySelector('.pop-up-age');
+const POP_UP_INOCULATIONS = document.querySelector('.pop-up-inoculations');
+const POP_UP_DISEASES = document.querySelector('.pop-up-diseases');
+const POP_UP_PARASITES = document.querySelector('.pop-up-parasites');
+
 const usedCount = 6;
 let currentPage=0;
 let pageNumber;
@@ -45,7 +56,7 @@ const shuffle = (array) => {
 
 const generatePages = (pagesNumber, pageSize, petsNumber) => {
   const result = [];
-  let petsCount = 0;
+  let petsCount = Math.floor(Math.random() * petsNumber);
 
   for(let page = 0; page < pagesNumber; page++) {
     result.push([]);
@@ -53,6 +64,7 @@ const generatePages = (pagesNumber, pageSize, petsNumber) => {
       result[page].push(petsCount++ % petsNumber);
     shuffle(result[page]);
   }
+
   return result;
 }
 
@@ -65,15 +77,34 @@ const renderPage = (cards, photos, names, page) => {
   }
 }
 
-const initPage = () => {
-  if(window.matchMedia("(max-width: 767px)").matches)
-     visibleCardsQuantity = 3;
-  else if(window.matchMedia("(max-width: 1279px)").matches)
-     visibleCardsQuantity = 6;
-  pageNumber = usedCount * petsArray.length / visibleCardsQuantity;
-  pages = generatePages(pageNumber--, visibleCardsQuantity, petsArray.length);
-  renderPage(contentItemCenterCards, contentItemCenterPhotos, contentItemCenterNames, pages[currentPage]);
+const generatePopUp = (petId) => {
+  POP_UP_IMAGE.innerHTML = `<img src="${petsArray[petId]["img"]}" alt="pet">\n`;
+  POP_UP_NAME.innerHTML = `${petsArray[petId]["name"]}`;
+  POP_UP_TYPE.innerHTML = `${petsArray[petId]["type"]} - ${petsArray[petId]["breed"]}`;
+  POP_UP_TEXT.innerHTML = `${petsArray[petId]["description"]}`;
+  POP_UP_AGE.innerHTML = `${petsArray[petId]["age"]}`;
+  POP_UP_INOCULATIONS.innerHTML = `${petsArray[petId]["inoculations"].join(', ')}`;
+  POP_UP_DISEASES.innerHTML = `${petsArray[petId]["diseases"].join(', ')}`;
+  POP_UP_PARASITES.innerHTML = `${petsArray[petId]["parasites"].join(', ')}`;;
 }
+
+const showPopUp = (event) => {
+  generatePopUp(event.currentTarget.dataset.pid);
+  BODY.classList.add('no-scroll');
+  MODAL_WINDOW.classList.add('active');
+}
+
+MODAL_WINDOW.addEventListener('click', (event) => {
+  if(event.target === MODAL_WINDOW) {
+    MODAL_WINDOW.classList.remove('active');
+    BODY.classList.remove('no-scroll');
+  }
+});
+MODAL_CLOSE_BUTTON.addEventListener('click', (event) => {
+  MODAL_WINDOW.classList.remove('active');
+  BODY.classList.remove('no-scroll');
+});
+
 
 const toggleNavigation = () => {
   MENU.classList.toggle('active');
@@ -154,6 +185,9 @@ CONTENT_ITEMS.addEventListener('animationend', (event) => {
     changedContentItem = CONTENT_ITEM_RIGHT;
   }
   CONTENT_ITEM_CENTER.innerHTML = changedContentItem.innerHTML;
+  contentItemCenterCards = document.querySelectorAll('.content-item.center .card');
+  console.log(contentItemCenterCards);
+  contentItemCenterCards.forEach(card => card.addEventListener('click', showPopUp));
   switch(currentPage){
     case 0:
       BUTTON_FIRST.classList.add('button-disabled');
@@ -184,5 +218,16 @@ CONTENT_ITEMS.addEventListener('animationend', (event) => {
       BUTTON_FIRST.addEventListener('click', moveContentFirst);
   }
 });
+
+const initPage = () => {
+  if(window.matchMedia("(max-width: 767px)").matches)
+     visibleCardsQuantity = 3;
+  else if(window.matchMedia("(max-width: 1279px)").matches)
+     visibleCardsQuantity = 6;
+  pageNumber = usedCount * petsArray.length / visibleCardsQuantity;
+  pages = generatePages(pageNumber--, visibleCardsQuantity, petsArray.length);
+  renderPage(contentItemCenterCards, contentItemCenterPhotos, contentItemCenterNames, pages[currentPage]);
+  contentItemCenterCards.forEach(card => card.addEventListener('click', showPopUp));
+}
 
 initPage();

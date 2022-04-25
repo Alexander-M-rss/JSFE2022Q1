@@ -73,7 +73,7 @@ MENU.addEventListener('click', () => {
 });
 
 BLACKOUT.addEventListener('click', () => {
-  if (menu.classList.contains('active'))
+  if (MENU.classList.contains('active'))
     toggleNavigation();
 });
 
@@ -114,12 +114,14 @@ const showPopUp = (event) => {
 
 BUTTON_LEFT.addEventListener('click', moveSliderLeft);
 BUTTON_RIGHT.addEventListener('click', moveSliderRight);
+
 MODAL_WINDOW.addEventListener('click', (event) => {
   if(event.target === MODAL_WINDOW) {
     MODAL_WINDOW.classList.remove('active');
     BODY.classList.remove('no-scroll');
   }
 });
+
 MODAL_CLOSE_BUTTON.addEventListener('click', (event) => {
   MODAL_WINDOW.classList.remove('active');
   BODY.classList.remove('no-scroll');
