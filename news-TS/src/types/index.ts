@@ -1,5 +1,5 @@
-export interface Article {
-    source: Source;
+export interface IArticle {
+    source: ISource;
     author: string;
     title: string;
     description: string;
@@ -9,7 +9,7 @@ export interface Article {
     content: string;
 }
 
-export interface Source {
+export interface ISource {
     id: string;
     name: string;
     description?: string;
@@ -17,4 +17,14 @@ export interface Source {
     category?: string;
     language?: string;
     country?: string;
+}
+
+export interface IApiResponse {
+    status: string;
+    sources?: ISource[];
+    articles?: IArticle[];
+}
+
+export interface IDraw<T> {
+    draw: (value: T[]) => void;
 }
