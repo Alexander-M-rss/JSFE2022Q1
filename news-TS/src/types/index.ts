@@ -31,16 +31,19 @@ export interface IDraw<T> {
 
 export type apiRequest = {
     endpoint: endpoints;
-    options: apiOptions;
+    options?: apiOptions;
 };
 
 export type apiOptions = {
     apiKey?: string;
-    source?: string;
+    sources?: string;
 };
 
 export type endpoints = 'sources' | 'everything';
 
 export type drawContentFunc = (data: IApiResponse) => void;
 
-export enum httpErr {unauthorized = 401, notFound = 404};;
+export enum httpErr {
+    unauthorized = 401,
+    notFound = 404,
+}
