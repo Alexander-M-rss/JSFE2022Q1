@@ -1,7 +1,7 @@
 import AppLoader from './appLoader';
-import { drawContentFunc } from '../../types/index';
+import { drawContentFunc, IAppController } from '../../types/index';
 
-class AppController extends AppLoader {
+class AppController extends AppLoader implements IAppController {
     getSources(callback: drawContentFunc): void {
         super.getResp(
             {

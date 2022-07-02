@@ -47,3 +47,13 @@ export enum httpErr {
     unauthorized = 401,
     notFound = 404,
 }
+
+export interface IAppView {
+    drawNews(data: IApiResponse): void;
+    drawSources(data: IApiResponse): void;
+}
+
+export interface IAppController {
+    getSources(callback: drawContentFunc): void;
+    getNews(e: MouseEvent, callback: drawContentFunc): void;
+}

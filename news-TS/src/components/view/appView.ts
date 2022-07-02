@@ -1,8 +1,8 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import { IApiResponse, IDraw, IArticle, ISource } from '../../types/index';
+import { IApiResponse, IDraw, IArticle, ISource, IAppView } from '../../types/index';
 
-export class AppView {
+export class AppView implements IAppView {
     news: IDraw<IArticle>;
     sources: IDraw<ISource>;
 
