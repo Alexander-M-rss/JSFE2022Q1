@@ -37,9 +37,11 @@ export type apiRequest = {
 export type apiOptions = {
     apiKey?: string;
     sources?: string;
+    language?: string;
+    country?: string;
 };
 
-export type endpoints = 'sources' | 'everything';
+export type endpoints = 'sources' | 'everything' | 'top-headlines';
 
 export type drawContentFunc = (data: IApiResponse) => void;
 
@@ -55,5 +57,6 @@ export interface IAppView {
 
 export interface IAppController {
     getSources(callback: drawContentFunc): void;
+    getTopHeadlines(callback: drawContentFunc): void;
     getNews(e: MouseEvent, callback: drawContentFunc): void;
 }
