@@ -28,14 +28,14 @@ footer .rss-logo:hover {
 }
 footer .copyright {
     font-size: 14px;
-    color: #333;
+    color: #fff;
     text-align: center;
 }
 footer .copyright a {
-    color: #444;
+    color: #777;
 }
 footer .copyright a:hover {
-    color: #555;
+    color: #aaa;
 }
 footer .copyright:before {
     content: '©';
@@ -51,4 +51,55 @@ footer .link {
 }
 footer .link:hover {
  	  color: #70d6ff;
+}
+
+@media (max-width: 639px) {
+    header {
+      padding: 0px 30px;
+    }
+
+    header h1 {
+      font-size: 32px;
+    }
+
+    footer {
+        height: 60px;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 500px) {
+    footer .link {
+        width: 20vw;
+    }
+
+    footer .copyright {
+        width: 50vw;
+    }
+
+    footer .rss-logo {
+        width: 20vw;
+    }
+}
+
+@media (max-width: 375px) {
+    header {
+        padding: 0.5em;
+    }
+
+    footer .copyright {
+        width: 40vw;
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        text-align: center;
+    }
+}
+
+@media (min-width: 1440px) {
+    .footer {
+      justify-content: space-evenly;
+    }
 }
