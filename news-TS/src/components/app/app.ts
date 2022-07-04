@@ -13,9 +13,10 @@ class App {
     start() {
         const mainSources = document.querySelector('.sources') as HTMLDivElement;
 
-        mainSources.addEventListener('click', (e) =>
+        mainSources.addEventListener('click', (e: MouseEvent) =>
             this.controller.getNews(e, (data: IApiResponse): void => this.view.drawNews(data))
         );
+        this.controller.getTopHeadlines((data: IApiResponse): void => this.view.drawNews(data));
         this.controller.getSources((data: IApiResponse): void => this.view.drawSources(data));
     }
 }
