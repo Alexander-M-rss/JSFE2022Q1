@@ -164,3 +164,16 @@
         padding-left: 25px;
     }
 }
+
+@media (min-width: 1440px) {
+  .news {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+      align-items: stretch;
+  }
+
+  .news__item {
+      margin: 1rem 1rem;
+  }
+}
