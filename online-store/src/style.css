@@ -19,7 +19,7 @@
 }
 
 .header, .main {
-    width: 100%;
+  width: 100%;
 }
 
 .header .container {
@@ -127,15 +127,15 @@
 }
 
 .filter-by-manufacturer .btn.samsung {
-    background-image: url('./img/samsung.svg');
+  background-image: url('./img/samsung.svg');
 }
 
 .filter-by-manufacturer .btn.apple {
-    background-image: url('./img/apple.svg');
+  background-image: url('./img/apple.svg');
 }
 
 .filter-by-manufacturer .btn.xiaomi {
-    background-image: url('./img/xiaomi.svg');
+  background-image: url('./img/xiaomi.svg');
 }
 
 .filter-by-manufacturer .btn.active, .filter-by-cams .btn.active {
@@ -143,9 +143,9 @@
 }
 
 .filter-by-cams .btn {
-    border: 2px solid #fff;
-    border-radius: 50%;
-    color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: #fff;
 }
 
 .filter-by-color .btn {
@@ -228,8 +228,8 @@
 }
 
 .range .title {
-    font-size: 16px;
-    margin: 15px 0 5px;
+  font-size: 16px;
+  margin: 15px 0 5px;
 }
 
 .range-slider {
@@ -282,7 +282,7 @@
 }
 
 .slider.noUi-horizontal {
-    height: 4px;
+  height: 4px;
 }
 
 .slider.noUi-horizontal .noUi-handle:before, .slider.noUi-horizontal .noUi-handle:after {
@@ -387,4 +387,63 @@
   font-family: Open Sans,sans-serif;
   font-size: 16px;
   font-weight: 400;
+}
+
+.items-list {
+  margin: auto;
+  width: 100%;
+  width: 96%;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  grid-gap: 20px;
+}
+
+.item {
+  padding: 0;
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+  background-color: rgba(19,20,21,.3);
+  border: 2px solid #626f71;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.item-title {
+  margin: 15px 0;
+  width: 100%;
+  min-height: 20px;
+  padding-left: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-stretch: condensed;
+}
+
+.item-img-container {
+  display: flex;
+  justify-content: center;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.item-img {
+  width: auto;
+  height: 100px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.item-props {
+  flex-grow: 1;
+  line-height: 24px;
+  list-style: none;
+  padding-left: 10px;
+  pointer-events: none;
+  text-align: center;
+  user-select: none;
+}
+
+@media screen and (max-width: 1422px) {
+  .items-list {
+    grid-template-columns: repeat(4,1fr);
+  }
 }
