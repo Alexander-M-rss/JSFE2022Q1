@@ -1,12 +1,12 @@
 .body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   color: #fff;
   font-family: sans-serif;
   background: url('./img/bg.jpg') no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  flex-grow: 1;
-  padding-bottom: 50px;
 }
 
 .header {
@@ -440,6 +440,53 @@
   pointer-events: none;
   text-align: center;
   user-select: none;
+}
+
+.footer {
+  margin-top: 30px;
+  padding: 10px 20px;
+  border-top: 2px solid #fff;
+  border-radius: 20px 20px 0 0;
+  background: #121c1e;
+}
+
+.footer .container {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+}
+
+footer .rss-logo {
+  width: 100px;
+  transition: 0.3s;
+}
+
+footer .rss-logo:hover {
+  filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
+}
+
+footer .copyright {
+  margin: auto;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+}
+
+footer .link {
+  display: block;
+  width: 100px;
+  text-align: right;
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+footer .link:hover {
+  color: #cab67c;
 }
 
 @media screen and (max-width: 1422px) {
