@@ -1,7 +1,17 @@
 import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
+import AppController from '../controller/controllerApp';
+import data from '../data/data';
 
 class App {
+  controller;
+
+  constructor() {
+    const itemsList = document.querySelector<HTMLDivElement>('.items-list');
+    if (!itemsList) throw new Error('index.html is damaged');
+
+    this.controller = new AppController(data, itemsList);
+  }
   start() {
     const qtySlider = document.querySelector<HTMLElement>('.quantity-slider');
     const yearSlider = document.querySelector<HTMLElement>('.year-slider');
@@ -32,6 +42,7 @@ class App {
       connect: true,
       tooltips: { to: (x) => Math.trunc(x) },
     });
+    this.controller.start();
   }
 }
 

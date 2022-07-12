@@ -123,7 +123,6 @@
 .filter-by-manufacturer .btn {
   border: 0;
   font-size: 0;
-  /* position: relative; */
 }
 
 .filter-by-manufacturer .btn.samsung {
@@ -202,7 +201,6 @@
   padding: 0;
   height: 30px;
   width: 30px;
-  /* display: flex; */
   position: relative;
   background-color: hsla(0,0%,100%,.3);
   border-radius: 5px;
@@ -394,8 +392,14 @@
   width: 100%;
   width: 96%;
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: [raw-start] repeat(5,1fr) [raw-end];
   grid-gap: 20px;
+}
+
+.no-result {
+  margin: 50px auto;
+  grid-column: raw-start / raw-end;
+  text-align: center;
 }
 
 .item {
@@ -491,6 +495,6 @@ footer .link:hover {
 
 @media screen and (max-width: 1422px) {
   .items-list {
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: [raw-start] repeat(4,1fr) [raw-end];
   }
 }
