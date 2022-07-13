@@ -414,6 +414,35 @@
   box-sizing: border-box;
 }
 
+.marker {
+    background: #cbb77a;
+    bottom: 15px;
+    height: 30px;
+    left: -8px;
+    position: absolute;
+    width: 80px;
+}
+
+.marker:before {
+    border-bottom: 8px solid #14455b;
+    border-left: 8px solid transparent;
+    top: -8px;
+}
+
+.marker:after, .marker:before {
+    content: "";
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+
+.marker:after {
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid #cbb77a;
+    border-top: 15px solid transparent;
+    right: -15px;
+}
+
 .item-title {
   margin: 15px 0;
   width: 100%;
@@ -493,6 +522,52 @@ footer .link {
 
 footer .link:hover {
   color: #cab67c;
+}
+
+.popup {
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--toast-border-radius);
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.075);
+  overflow: hidden;
+  color: #fff;
+  background-color: #212529;
+  transition: 0.3s opacity;
+}
+
+.popup.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.popup .text {
+  padding: 1rem;
+  padding-right: 2.25rem;
+}
+
+.popup-close {
+  content: "";
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 0.875em;
+  height: 0.875em;
+  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/0.875em auto no-repeat;
+  border: 0;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+  filter: invert(1);
+}
+
+.popup-close:hover {
+  opacity: 1;
 }
 
 @media screen and (max-width: 1422px) {

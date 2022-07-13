@@ -3,20 +3,27 @@ import 'nouislider/dist/nouislider.css';
 import AppController from '../controller/controllerApp';
 import data from '../data/data';
 
+const BASKET_COUNTER_MAX = 20;
+
 class App {
   controller;
 
   constructor() {
     const itemsList = document.querySelector<HTMLDivElement>('.items-list');
-    if (!itemsList) throw new Error('index.html is damaged');
+    const basketCounter = document.querySelector<HTMLSpanElement>('.quantity');
+    const popup = document.querySelector<HTMLDivElement>('.popup');
+    const popupCloseBtn = document.querySelector<HTMLButtonElement>('.popup');
 
-    this.controller = new AppController(data, itemsList);
+    if (!itemsList || !basketCounter || !popup || !popupCloseBtn) throw new Error('index.html is damaged');
+
+    this.controller = new AppController(data, itemsList, basketCounter, BASKET_COUNTER_MAX, popup, popupCloseBtn);
   }
   start() {
     const qtySlider = document.querySelector<HTMLElement>('.quantity-slider');
     const yearSlider = document.querySelector<HTMLElement>('.year-slider');
+    const itemsList = document.querySelector<HTMLDivElement>('.items-list');
 
-    if (!qtySlider || !yearSlider) throw new Error('index.html is damaged');
+    if (!qtySlider || !yearSlider || !itemsList) throw new Error('index.html is damaged');
 
     const [qtySliderMin, qtySliderMax] = [1, 12];
     const [yearSliderMin, yearSliderMax] = [2000, 2022];
@@ -42,7 +49,10 @@ class App {
       connect: true,
       tooltips: { to: (x) => Math.trunc(x) },
     });
+
     this.controller.start();
+
+    itemsList.addEventListener('click', (event) => this.controller.selectItem(event));
   }
 }
 
