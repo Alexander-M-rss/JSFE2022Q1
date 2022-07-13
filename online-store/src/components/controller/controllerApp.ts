@@ -1,6 +1,6 @@
 import { IItem } from '../data/data';
 import AppModel from '../model/modelApp';
-import AppView from '../view/viewApp';
+import { AppView } from '../view/viewApp';
 
 class AppController {
   model;
@@ -23,7 +23,7 @@ class AppController {
   }
 
   start(): void {
-    this.view.render(this.model.getItems(), this.selectedItems);
+    this.view.render(this.model.getItems(), this.selectedItems, 1);
   }
 
   selectItem(event: MouseEvent): void {
@@ -54,6 +54,10 @@ class AppController {
 
       target = target.parentNode as HTMLElement;
     }
+  }
+
+  selectSorting(element: HTMLSelectElement): void {
+    this.view.render(this.view.items, this.selectedItems, parseInt(element.value));
   }
 }
 

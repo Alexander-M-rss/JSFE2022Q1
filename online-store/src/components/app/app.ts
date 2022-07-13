@@ -22,8 +22,9 @@ class App {
     const qtySlider = document.querySelector<HTMLElement>('.quantity-slider');
     const yearSlider = document.querySelector<HTMLElement>('.year-slider');
     const itemsList = document.querySelector<HTMLDivElement>('.items-list');
+    const selectSorting = document.querySelector<HTMLSelectElement>('.sorting-type-select');
 
-    if (!qtySlider || !yearSlider || !itemsList) throw new Error('index.html is damaged');
+    if (!qtySlider || !yearSlider || !itemsList || !selectSorting) throw new Error('index.html is damaged');
 
     const [qtySliderMin, qtySliderMax] = [1, 12];
     const [yearSliderMin, yearSliderMax] = [2000, 2022];
@@ -50,9 +51,12 @@ class App {
       tooltips: { to: (x) => Math.trunc(x) },
     });
 
-    this.controller.start();
-
     itemsList.addEventListener('click', (event) => this.controller.selectItem(event));
+    selectSorting.addEventListener('input', (event) => {
+      if (event.target) this.controller.selectSorting(selectSorting);
+    });
+
+    this.controller.start();
   }
 }
 

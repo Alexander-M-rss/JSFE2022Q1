@@ -1,6 +1,15 @@
 import { IItem } from '../data/data';
 
-class AppView {
+export enum SORTING_TYPE {
+  BY_NAME_ASC = 1,
+  BY_NAME_DESC,
+  BY_YEAR_ASC,
+  BY_YEAR_DESC,
+  BY_QTY_ASC,
+  BY_QTY_DESC,
+}
+
+export class AppView {
   itemsMap: Map<number, number>;
   items: Array<IItem>;
   itemMarkers: Array<HTMLDivElement>;
@@ -50,11 +59,11 @@ class AppView {
       </div>`;
   };
 
-  render(items: Array<IItem>, selected: Set<number>): void {
+  render(items: Array<IItem>, selected: Set<number>, sorting: SORTING_TYPE): void {
     let itemsHTML: Array<string> = [];
     this.itemsMap.clear();
-    this.items = items;
-    if (items.length) {
+    this.items = AppView.applySorting(items, sorting);
+    if (this.items.length) {
       itemsHTML = items.map((item, index) => {
         this.itemsMap.set(item.id, index);
         return AppView.renderItem(item);
@@ -93,6 +102,49 @@ class AppView {
 
     this.popup.classList.remove('hidden');
     setTimeout(() => this.popupCloseBtn.click(), 2500);
+  }
+
+  static sortByNameAsc(array: Array<IItem>): Array<IItem> {
+    return array.sort((a, b) => (a.name > b.name ? 1 : -1));
+  }
+
+  static sortByNameDesc(array: Array<IItem>): Array<IItem> {
+    return array.sort((a, b) => (a.name <= b.name ? 1 : -1));
+  }
+
+  static sortByYearAsc(array: Array<IItem>): Array<IItem> {
+    return array.sort((a, b) => (a.year > b.year ? 1 : -1));
+  }
+
+  static sortByYearDesc(array: Array<IItem>): Array<IItem> {
+    return array.sort((a, b) => (a.year <= b.year ? 1 : -1));
+  }
+
+  static sortByQtyAsc(array: Array<IItem>): Array<IItem> {
+    return array.sort((a, b) => (a.quantity > b.quantity ? 1 : -1));
+  }
+
+  static sortByQtyDesc(array: Array<IItem>): Array<IItem> {
+    return array.sort((a, b) => (a.quantity <= b.quantity ? 1 : -1));
+  }
+
+  static applySorting(array: Array<IItem>, sorting: number): Array<IItem> {
+    switch (sorting) {
+      case SORTING_TYPE.BY_NAME_ASC:
+        return this.sortByNameAsc(array);
+      case SORTING_TYPE.BY_NAME_DESC:
+        return this.sortByNameDesc(array);
+      case SORTING_TYPE.BY_YEAR_ASC:
+        return this.sortByYearAsc(array);
+      case SORTING_TYPE.BY_YEAR_DESC:
+        return this.sortByYearDesc(array);
+      case SORTING_TYPE.BY_QTY_ASC:
+        return this.sortByQtyAsc(array);
+      case SORTING_TYPE.BY_QTY_DESC:
+        return this.sortByQtyDesc(array);
+      default:
+        return array;
+    }
   }
 }
 
