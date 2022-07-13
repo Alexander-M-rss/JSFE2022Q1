@@ -443,6 +443,14 @@
     right: -15px;
 }
 
+.item.hidden {
+  display: none;
+}
+
+.marker.hidden {
+  display: none;
+}
+
 .item-title {
   margin: 15px 0;
   width: 100%;

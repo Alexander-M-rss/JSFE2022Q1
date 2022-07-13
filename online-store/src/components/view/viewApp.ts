@@ -3,8 +3,8 @@ import { IItem } from '../data/data';
 class AppView {
   itemsMap: Map<number, number>;
   items: Array<IItem>;
-  // itemMarkers: Array<HTMLDivElement>;
-  itemsHTML: Array<string>;
+  itemMarkers: Array<HTMLDivElement>;
+  itemCards: Array<HTMLDivElement>;
   itemsList: HTMLDivElement;
   basketCounter: HTMLSpanElement;
   popup: HTMLDivElement;
@@ -17,7 +17,8 @@ class AppView {
   ) {
     this.itemsMap = new Map<number, number>();
     this.items = [];
-    this.itemsHTML = [];
+    this.itemCards = [];
+    this.itemMarkers = [];
     this.itemsList = itemsList;
     this.basketCounter = basketCounter;
     this.popup = popup;
@@ -30,7 +31,7 @@ class AppView {
     selected = false
   ): string => {
     const fav = favorite ? 'да' : 'нет';
-    const marker = selected ? '<div class="marker" title="Товар добавлен в корзину"></div>' : '';
+    const hidden = selected ? '' : ' hidden';
 
     return `
       <div class="item" data-item-id="${id}">
@@ -45,34 +46,42 @@ class AppView {
           <li>Количество камер: ${cams}</li>
           <li>Популярный: ${fav}</li>
         </ul>
-        ${marker}
+        <div class="marker${hidden}" title="Товар добавлен в корзину"></div>
       </div>`;
   };
 
   render(items: Array<IItem>, selected: Set<number>): void {
+    let itemsHTML: Array<string> = [];
     this.itemsMap.clear();
     this.items = items;
     if (items.length) {
-      this.itemsHTML = items.map((item, index) => {
+      itemsHTML = items.map((item, index) => {
         this.itemsMap.set(item.id, index);
         return AppView.renderItem(item);
       });
 
       for (const i of selected) {
         const index = this.itemsMap.get(i);
-        if (index) this.itemsHTML[index] = AppView.renderItem(items[index], true);
+        if (index) itemsHTML[index] = AppView.renderItem(items[index], true);
       }
 
       this.basketCounter.innerHTML = selected.size.toString();
-      this.itemsList.innerHTML = this.itemsHTML.join('');
-    } else this.itemsList.innerHTML = '<h1 class="no-result">Извините, совпадений не обнаружено</h1>';
+      this.itemsList.innerHTML = itemsHTML.join('');
+      this.itemCards = Array.from(document.querySelectorAll('.item'));
+      this.itemMarkers = Array.from(document.querySelectorAll('.marker'));
+    } else {
+      this.itemsList.innerHTML = '<h1 class="no-result">Извините, совпадений не обнаружено</h1>';
+      this.itemCards = [];
+      this.itemMarkers = [];
+    }
   }
 
   selectItem(itemId: number, isSelected = true): void {
     const index = this.itemsMap.get(itemId);
 
-    if (index !== undefined) this.itemsHTML[index] = AppView.renderItem(this.items[index], isSelected);
-    this.itemsList.innerHTML = this.itemsHTML.join('');
+    if (index !== undefined)
+      if (isSelected) this.itemMarkers[index].classList.remove('hidden');
+      else this.itemMarkers[index].classList.add('hidden');
   }
 
   updateBasketCounter(n: number): void {
