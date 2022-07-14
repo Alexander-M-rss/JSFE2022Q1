@@ -355,6 +355,10 @@
   font-size: 0;
 }
 
+.clear.hidden {
+  display: none;
+}
+
 .sorting-type-select {
   box-sizing: border-box;
   width: 100%;
