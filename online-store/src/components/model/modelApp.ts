@@ -5,8 +5,8 @@ export interface IItemsRequest {
   cams: Set<number>;
   colors: Set<string>;
   favorite: boolean;
-  qty: { min: number, max: number };
-  years: { min: number, max: number };
+  qty: { min: number; max: number };
+  years: { min: number; max: number };
 }
 
 export class AppModel {
@@ -19,8 +19,18 @@ export class AppModel {
   }
 
   getItems(request: IItemsRequest): Array<IItem> {
-    this.currentItems = this.items.slice();
+    this.currentItems = AppModel.applyRangeFilters(this.items, request.qty, request.years);
     return this.currentItems;
+  }
+
+  static applyRangeFilters(
+    array: Array<IItem>,
+    qty: { min: number; max: number },
+    years: { min: number; max: number }
+  ): Array<IItem> {
+    return array.filter(
+      (item) => item.quantity >= qty.min && item.quantity <= qty.max && item.year >= years.min && item.year <= years.max
+    );
   }
 }
 

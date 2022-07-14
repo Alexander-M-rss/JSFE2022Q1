@@ -1,5 +1,5 @@
 import { IItem } from '../data/data';
-import { AppModel, IItemsRequest }from '../model/modelApp';
+import { AppModel, IItemsRequest } from '../model/modelApp';
 import { AppView, SORTING_TYPE } from '../view/viewApp';
 
 class AppController {
@@ -27,14 +27,13 @@ class AppController {
       colors: new Set<string>(null),
       favorite: false,
       qty: { min: 1, max: 12 },
-      years: { min: 2000, max: 2022 }
+      years: { min: 2000, max: 2022 },
     };
 
     this.selectedItems = new Set<number>(null);
     this.sortingMode = 1;
     this.searchString = '';
     this.basketCounterMax = basketCounterMax;
-
   }
 
   start(): void {
@@ -73,14 +72,23 @@ class AppController {
 
   selectSorting(element: HTMLSelectElement): void {
     const sortingMode = parseInt(element.value);
-    if(sortingMode in SORTING_TYPE)
-      this.sortingMode = sortingMode;
+    if (sortingMode in SORTING_TYPE) this.sortingMode = sortingMode;
     this.view.render(this.view.items, this.selectedItems, this.sortingMode, this.searchString);
   }
 
-  applySearch(searchString:string): void {
+  applySearch(searchString: string): void {
     this.searchString = searchString;
     this.view.applySearch(searchString);
+  }
+
+  applyQtyRange(min: number, max: number): void {
+    this.itemsRequest.qty = { min, max };
+    this.view.render(this.model.getItems(this.itemsRequest), this.selectedItems, this.sortingMode, this.searchString);
+  }
+
+  applyYearsRange(min: number, max: number): void {
+    this.itemsRequest.years = { min, max };
+    this.view.render(this.model.getItems(this.itemsRequest), this.selectedItems, this.sortingMode, this.searchString);
   }
 }
 
