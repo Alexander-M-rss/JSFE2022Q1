@@ -1,6 +1,15 @@
 import { IItem } from '../data/data';
 
-class AppModel {
+export interface IItemsRequest {
+  manufacturers: Set<string>;
+  cams: Set<number>;
+  colors: Set<string>;
+  favorite: boolean;
+  qty: { min: number, max: number };
+  years: { min: number, max: number };
+}
+
+export class AppModel {
   items: Array<IItem>;
   currentItems: Array<IItem>;
 
@@ -9,7 +18,7 @@ class AppModel {
     this.currentItems = [];
   }
 
-  getItems(): Array<IItem> {
+  getItems(request: IItemsRequest): Array<IItem> {
     this.currentItems = this.items.slice();
     return this.currentItems;
   }
