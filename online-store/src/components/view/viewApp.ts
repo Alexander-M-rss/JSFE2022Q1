@@ -59,8 +59,9 @@ export class AppView {
       </div>`;
   };
 
-  render(items: Array<IItem>, selected: Set<number>, sorting: SORTING_TYPE): void {
+  render(items: Array<IItem>, selected: Set<number>, sorting: SORTING_TYPE, searchString: string): void {
     let itemsHTML: Array<string> = [];
+
     this.itemsMap.clear();
     this.items = AppView.applySorting(items, sorting);
     if (this.items.length) {
@@ -77,6 +78,7 @@ export class AppView {
       this.basketCounter.innerHTML = selected.size.toString();
       this.itemsList.innerHTML = itemsHTML.join('');
       this.itemCards = Array.from(document.querySelectorAll('.item'));
+      if (searchString.length) this.applySearch(searchString);
       this.itemMarkers = Array.from(document.querySelectorAll('.marker'));
     } else {
       this.itemsList.innerHTML = '<h1 class="no-result">Извините, совпадений не обнаружено</h1>';
@@ -144,6 +146,44 @@ export class AppView {
         return this.sortByQtyDesc(array);
       default:
         return array;
+    }
+  }
+
+  static filterByName(array: Array<IItem>, search: string): Array<number> {
+    const visibleItemsId: Array<number> = [];
+
+    array.forEach((item) => {
+      if (item.name.toLowerCase().includes(search)) visibleItemsId.push(item.id);
+    });
+    return visibleItemsId;
+  }
+
+  applySearch(search: string): void {
+    const noResultMsg = document.querySelector<HTMLHeadingElement>('.no-result');
+
+    if (!this.items.length) return;
+
+    if (!search.length) {
+      if (noResultMsg) noResultMsg.remove();
+      this.itemCards.forEach((item) => item.classList.remove('hidden'));
+      return;
+    }
+
+    const visibleItemsId: Array<number> = AppView.filterByName(this.items, search.toLowerCase());
+
+    this.itemCards.forEach((item) => item.classList.add('hidden'));
+    if (visibleItemsId.length) {
+      if (noResultMsg) noResultMsg.remove();
+      visibleItemsId.forEach((itemId) => {
+        const index = this.itemsMap.get(itemId);
+        if (index !== undefined) this.itemCards[index].classList.remove('hidden');
+      });
+    } else if (noResultMsg === null) {
+      const newMsg = document.createElement('h1');
+
+      newMsg.classList.add('no-result');
+      newMsg.innerHTML = 'Извините, совпадений не обнаружено';
+      this.itemsList.append(newMsg);
     }
   }
 }

@@ -23,8 +23,11 @@ class App {
     const yearSlider = document.querySelector<HTMLElement>('.year-slider');
     const itemsList = document.querySelector<HTMLDivElement>('.items-list');
     const selectSorting = document.querySelector<HTMLSelectElement>('.sorting-type-select');
+    const searchInput = document.querySelector<HTMLInputElement>('.search');
+    const searchClearBtn = document.querySelector<HTMLButtonElement>('.clear');
 
-    if (!qtySlider || !yearSlider || !itemsList || !selectSorting) throw new Error('index.html is damaged');
+    if (!qtySlider || !yearSlider || !itemsList || !selectSorting || !searchInput || !searchClearBtn)
+      throw new Error('index.html is damaged');
 
     const [qtySliderMin, qtySliderMax] = [1, 12];
     const [yearSliderMin, yearSliderMax] = [2000, 2022];
@@ -54,6 +57,24 @@ class App {
     itemsList.addEventListener('click', (event) => this.controller.selectItem(event));
     selectSorting.addEventListener('input', (event) => {
       if (event.target) this.controller.selectSorting(selectSorting);
+    });
+
+    searchClearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchClearBtn.classList.add('hidden');
+      searchInput.classList.remove('not-empty');
+      this.controller.applySearch(searchInput.value);
+    });
+
+    searchInput.addEventListener('input', () => {
+      if (searchInput.value.length === 0) {
+        searchClearBtn.classList.add('hidden');
+        searchInput.classList.remove('not-empty');
+      } else if (searchInput.value.length === 1) {
+        searchClearBtn.classList.remove('hidden');
+        searchInput.classList.add('not-empty');
+      }
+      this.controller.applySearch(searchInput.value);
     });
 
     this.controller.start();

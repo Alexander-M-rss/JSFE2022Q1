@@ -1,11 +1,13 @@
 import { IItem } from '../data/data';
 import AppModel from '../model/modelApp';
-import { AppView } from '../view/viewApp';
+import { AppView, SORTING_TYPE } from '../view/viewApp';
 
 class AppController {
   model;
   view;
   selectedItems;
+  searchString;
+  sortingMode: SORTING_TYPE;
   basketCounterMax;
 
   constructor(
@@ -19,11 +21,13 @@ class AppController {
     this.model = new AppModel(data);
     this.view = new AppView(view, basketCounter, popup, popupCloseBtn);
     this.selectedItems = new Set<number>(null);
+    this.sortingMode = 1;
+    this.searchString = '';
     this.basketCounterMax = basketCounterMax;
   }
 
   start(): void {
-    this.view.render(this.model.getItems(), this.selectedItems, 1);
+    this.view.render(this.model.getItems(), this.selectedItems, this.sortingMode, this.searchString);
   }
 
   selectItem(event: MouseEvent): void {
@@ -57,7 +61,14 @@ class AppController {
   }
 
   selectSorting(element: HTMLSelectElement): void {
-    this.view.render(this.view.items, this.selectedItems, parseInt(element.value));
+    const sortingMode = parseInt(element.value);
+    if (sortingMode in SORTING_TYPE) this.sortingMode = sortingMode;
+    this.view.render(this.view.items, this.selectedItems, this.sortingMode, this.searchString);
+  }
+
+  applySearch(searchString: string): void {
+    this.searchString = searchString;
+    this.view.applySearch(searchString);
   }
 }
 
