@@ -15,10 +15,22 @@ class App {
     const basketCounter = document.querySelector<HTMLSpanElement>('.quantity');
     const popup = document.querySelector<HTMLDivElement>('.popup');
     const popupCloseBtn = document.querySelector<HTMLButtonElement>('.popup');
+    const btns = document.querySelectorAll<HTMLButtonElement>('.btn');
+    const checkbox = document.querySelector<HTMLInputElement>('.favorite-input');
 
-    if (!itemsList || !basketCounter || !popup || !popupCloseBtn) throw new Error('index.html is damaged');
+    if (!itemsList || !basketCounter || !popup || !popupCloseBtn || !btns || !checkbox)
+      throw new Error('index.html is damaged');
 
-    this.controller = new AppController(data, itemsList, basketCounter, BASKET_COUNTER_MAX, popup, popupCloseBtn);
+    this.controller = new AppController(
+      data,
+      itemsList,
+      basketCounter,
+      BASKET_COUNTER_MAX,
+      popup,
+      popupCloseBtn,
+      btns,
+      checkbox
+    );
   }
   start() {
     const qtySlider = document.querySelector<HTMLDivElement>('.quantity-slider');
@@ -48,8 +60,11 @@ class App {
     )
       throw new Error('index.html is damaged');
 
-    const [qtySliderStart, qtySliderEnd] = [1, 12];
-    const [yearSliderStart, yearSliderEnd] = [2000, 2022];
+    const [qtySliderStart, qtySliderEnd] = [this.controller.itemsRequest.qty.min, this.controller.itemsRequest.qty.max];
+    const [yearSliderStart, yearSliderEnd] = [
+      this.controller.itemsRequest.years.min,
+      this.controller.itemsRequest.years.max,
+    ];
 
     noUiSlider.create(qtySlider, {
       range: {
@@ -72,6 +87,18 @@ class App {
       connect: true,
       tooltips: { to: (x) => Math.trunc(x) },
     });
+
+    qtyLow.innerText = qtySliderStart.toString();
+    qtyHi.innerText = qtySliderEnd.toString();
+    yearLow.innerText = yearSliderStart.toString();
+    yearHi.innerText = yearSliderEnd.toString();
+    selectSorting.value = this.controller.sortingMode.toString();
+
+    if (this.controller.searchString.length) {
+      searchClearBtn.classList.remove('hidden');
+      searchInput.classList.add('not-empty');
+      searchInput.value = this.controller.searchString;
+    }
 
     this.controller.start();
 

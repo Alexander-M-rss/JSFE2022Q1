@@ -2,14 +2,17 @@ import { IItem } from '../data/data';
 import { AppModel, IItemsRequest } from '../model/modelApp';
 import { AppView, SORTING_TYPE } from '../view/viewApp';
 
+type range = { min: string; max: string };
+
 class AppController {
-  model;
-  view;
+  model: AppModel;
+  view: AppView;
   itemsRequest: IItemsRequest;
-  selectedItems;
-  searchString;
+  selectedItems: Set<number>;
+  searchString: string;
   sortingMode: SORTING_TYPE;
-  basketCounterMax;
+  basketCounterMax: number;
+  settingsLoaded: boolean;
 
   constructor(
     data: Array<IItem>,
@@ -17,10 +20,12 @@ class AppController {
     basketCounter: HTMLSpanElement,
     basketCounterMax: number,
     popup: HTMLDivElement,
-    popupCloseBtn: HTMLButtonElement
+    popupCloseBtn: HTMLButtonElement,
+    btns: NodeListOf<HTMLButtonElement>,
+    checkbox: HTMLInputElement
   ) {
     this.model = new AppModel(data);
-    this.view = new AppView(view, basketCounter, popup, popupCloseBtn);
+    this.view = new AppView(view, basketCounter, popup, popupCloseBtn, btns, checkbox);
     this.itemsRequest = {
       manufacturers: new Set<string>(null),
       cams: new Set<number>(null),
@@ -34,9 +39,18 @@ class AppController {
     this.sortingMode = 1;
     this.searchString = '';
     this.basketCounterMax = basketCounterMax;
+
+    this.settingsLoaded = this.loadSettings();
   }
 
   start(): void {
+    if (this.settingsLoaded)
+      this.view.setButtonState(
+        this.itemsRequest.manufacturers,
+        this.itemsRequest.cams,
+        this.itemsRequest.colors,
+        this.itemsRequest.favorite
+      );
     this.view.render(this.model.getItems(this.itemsRequest), this.selectedItems, this.sortingMode, this.searchString);
   }
 
@@ -159,6 +173,72 @@ class AppController {
     localStorage.setItem('omrss_selectedItems', JSON.stringify(Array.from(this.selectedItems)));
     localStorage.setItem('omrss_searchString', this.searchString);
     localStorage.setItem('omrss_sortingMode', JSON.stringify(this.sortingMode));
+  }
+
+  loadSettings(): boolean {
+    const manufacturers: Array<string> = JSON.parse(localStorage.getItem('omrss_manufacturers') || '[]');
+    const cams: Array<string> = JSON.parse(localStorage.getItem('omrss_cams') || '[]');
+    const colors: Array<string> = JSON.parse(localStorage.getItem('omrss_colors') || '[]');
+    const ranges: Array<range> = JSON.parse(localStorage.getItem('omrss_ranges') || '[]');
+    const favorite: boolean = JSON.parse(localStorage.getItem('omrss_favorite') || 'false');
+    const selectedItems: Array<string> = JSON.parse(localStorage.getItem('omrss_selectedItems') || '[]');
+    const searchString = localStorage.getItem('omrss_searchString') || '';
+    const sortingMode = parseInt(localStorage.getItem('omrss_sortingMode') || '1');
+
+    let loaded = false;
+
+    if (Array.isArray(manufacturers) && manufacturers.length) {
+      manufacturers.forEach((item) => this.itemsRequest.manufacturers.add(item));
+      loaded = true;
+    }
+    if (Array.isArray(cams) && cams.length) {
+      cams.forEach((item) => {
+        const x = parseInt(item);
+        if (!isNaN(x)) this.itemsRequest.cams.add(x);
+      });
+      loaded = true;
+    }
+    if (Array.isArray(colors) && colors.length) {
+      colors.forEach((item) => this.itemsRequest.colors.add(item));
+      loaded = true;
+    }
+    if (Array.isArray(ranges) && ranges.length > 1) {
+      const qtyMin = parseInt(ranges[0].min);
+      const qtyMax = parseInt(ranges[0].max);
+      if (!isNaN(qtyMin) && !isNaN(qtyMax)) {
+        this.itemsRequest.qty.min = qtyMin;
+        this.itemsRequest.qty.max = qtyMax;
+        loaded = true;
+      }
+      const yearMin = parseInt(ranges[1].min);
+      const yearMax = parseInt(ranges[1].max);
+      if (!isNaN(qtyMin) && !isNaN(qtyMax)) {
+        this.itemsRequest.years.min = yearMin;
+        this.itemsRequest.years.max = yearMax;
+        loaded = true;
+      }
+    }
+    if (favorite) {
+      this.itemsRequest.favorite = true;
+      loaded = true;
+    }
+    if (Array.isArray(selectedItems) && selectedItems.length) {
+      selectedItems.forEach((string) => {
+        const item = parseInt(string);
+
+        if (!isNaN(item)) this.selectedItems.add(item);
+      });
+    }
+    if (searchString.length) {
+      this.searchString = searchString;
+      loaded = true;
+    }
+    if (!isNaN(sortingMode) && sortingMode > 1) {
+      this.sortingMode = sortingMode;
+      loaded = true;
+    }
+
+    return loaded;
   }
 }
 

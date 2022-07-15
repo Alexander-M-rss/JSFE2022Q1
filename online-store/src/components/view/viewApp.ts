@@ -18,11 +18,15 @@ export class AppView {
   basketCounter: HTMLSpanElement;
   popup: HTMLDivElement;
   popupCloseBtn: HTMLButtonElement;
+  btns: NodeListOf<HTMLButtonElement>;
+  checkbox: HTMLInputElement;
   constructor(
     itemsList: HTMLDivElement,
     basketCounter: HTMLSpanElement,
     popup: HTMLDivElement,
-    popupCloseBtn: HTMLButtonElement
+    popupCloseBtn: HTMLButtonElement,
+    btns: NodeListOf<HTMLButtonElement>,
+    checkbox: HTMLInputElement
   ) {
     this.itemsMap = new Map<number, number>();
     this.items = [];
@@ -33,6 +37,8 @@ export class AppView {
     this.popup = popup;
     this.popupCloseBtn = popupCloseBtn;
     this.popupCloseBtn.addEventListener('click', () => this.popup.classList.add('hidden'));
+    this.btns = btns;
+    this.checkbox = checkbox;
   }
 
   static renderItem = (
@@ -185,6 +191,27 @@ export class AppView {
       newMsg.innerHTML = 'Извините, совпадений не обнаружено';
       this.itemsList.append(newMsg);
     }
+  }
+
+  setButtonState(manufacturers: Set<string>, cams: Set<number>, colors: Set<string>, favorite: boolean): void {
+    this.checkbox.checked = favorite;
+    this.btns.forEach((btn) => {
+      const filterType = btn.dataset.type || '';
+      let active = false;
+      switch (filterType) {
+        case 'manufacturer':
+          if (manufacturers.has(btn.innerText.toLowerCase())) active = true;
+          break;
+        case 'cams':
+          if (cams.has(parseInt(btn.innerText.toLowerCase()))) active = true;
+          break;
+        case 'colors':
+          if (colors.has(btn.innerText.toLowerCase())) active = true;
+          break;
+      }
+      if (active) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
   }
 }
 
