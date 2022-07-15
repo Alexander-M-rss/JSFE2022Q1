@@ -127,6 +127,18 @@ class AppController {
           }
         }
 
+        if (filterType === 'colors') {
+          const color = target.innerText.toLowerCase();
+
+          if (this.itemsRequest.colors.has(color)) {
+            this.itemsRequest.colors.delete(color);
+            target.classList.remove('active');
+          } else {
+            this.itemsRequest.colors.add(color);
+            target.classList.add('active');
+          }
+        }
+
         this.view.render(
           this.model.getItems(this.itemsRequest),
           this.selectedItems,

@@ -25,6 +25,7 @@ export class AppModel {
       this.currentItems = AppModel.applyFilterByManufacturers(this.currentItems, request.manufacturers);
     if (request.cams.size) this.currentItems = AppModel.applyFilterByCams(this.currentItems, request.cams);
     this.currentItems = AppModel.applyRangeFilters(this.currentItems, request.qty, request.years);
+    if (request.colors.size) this.currentItems = AppModel.applyFilterByColors(this.currentItems, request.colors);
     return this.currentItems;
   }
 
@@ -44,6 +45,10 @@ export class AppModel {
 
   static applyFilterByCams(array: Array<IItem>, cams: Set<number>): Array<IItem> {
     return array.filter((item) => cams.has(item.cams));
+  }
+
+  static applyFilterByColors(array: Array<IItem>, colors: Set<string>): Array<IItem> {
+    return array.filter((item) => colors.has(item.color.toLocaleLowerCase()));
   }
 }
 
