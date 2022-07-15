@@ -24,6 +24,7 @@ export class AppModel {
     if (request.manufacturers.size)
       this.currentItems = AppModel.applyFilterByManufacturers(this.currentItems, request.manufacturers);
     if (request.cams.size) this.currentItems = AppModel.applyFilterByCams(this.currentItems, request.cams);
+    if (request.favorite) this.currentItems = AppModel.applyFilterByFavorites(this.currentItems);
     this.currentItems = AppModel.applyRangeFilters(this.currentItems, request.qty, request.years);
     if (request.colors.size) this.currentItems = AppModel.applyFilterByColors(this.currentItems, request.colors);
     return this.currentItems;
@@ -49,6 +50,10 @@ export class AppModel {
 
   static applyFilterByColors(array: Array<IItem>, colors: Set<string>): Array<IItem> {
     return array.filter((item) => colors.has(item.color.toLocaleLowerCase()));
+  }
+
+  static applyFilterByFavorites(array: Array<IItem>): Array<IItem> {
+    return array.filter((item) => item.favorite);
   }
 }
 

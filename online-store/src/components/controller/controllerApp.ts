@@ -98,7 +98,7 @@ class AppController {
     const filterGroup = event.currentTarget as HTMLElement;
 
     while (target !== filterGroup) {
-      if (target.classList.contains('btn')) {
+      if (target.classList.contains('btn') || target.classList.contains('favorite-input')) {
         const filterType = target.dataset.type || '';
 
         if (filterType === 'manufacturer') {
@@ -111,9 +111,7 @@ class AppController {
             this.itemsRequest.manufacturers.add(manufacturer);
             target.classList.add('active');
           }
-        }
-
-        if (filterType === 'cams') {
+        } else if (filterType === 'cams') {
           const cams = parseInt(target.innerText);
 
           if (isNaN(cams)) return;
@@ -125,9 +123,7 @@ class AppController {
             this.itemsRequest.cams.add(cams);
             target.classList.add('active');
           }
-        }
-
-        if (filterType === 'colors') {
+        } else if (filterType === 'colors') {
           const color = target.innerText.toLowerCase();
 
           if (this.itemsRequest.colors.has(color)) {
@@ -137,7 +133,7 @@ class AppController {
             this.itemsRequest.colors.add(color);
             target.classList.add('active');
           }
-        }
+        } else if (filterType === 'favorite') this.itemsRequest.favorite = (target as HTMLInputElement).checked;
 
         this.view.render(
           this.model.getItems(this.itemsRequest),
