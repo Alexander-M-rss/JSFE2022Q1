@@ -149,6 +149,17 @@ class AppController {
       target = target.parentNode as HTMLElement;
     }
   }
+
+  saveSettings(): void {
+    localStorage.setItem('omrss_manufacturers', JSON.stringify(Array.from(this.itemsRequest.manufacturers)));
+    localStorage.setItem('omrss_cams', JSON.stringify(Array.from(this.itemsRequest.cams)));
+    localStorage.setItem('omrss_colors', JSON.stringify(Array.from(this.itemsRequest.colors)));
+    localStorage.setItem('omrss_ranges', JSON.stringify([this.itemsRequest.qty, this.itemsRequest.years]));
+    localStorage.setItem('omrss_favorite', JSON.stringify(this.itemsRequest.favorite));
+    localStorage.setItem('omrss_selectedItems', JSON.stringify(Array.from(this.selectedItems)));
+    localStorage.setItem('omrss_searchString', this.searchString);
+    localStorage.setItem('omrss_sortingMode', JSON.stringify(this.sortingMode));
+  }
 }
 
 export default AppController;

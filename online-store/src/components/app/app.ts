@@ -119,6 +119,8 @@ class App {
     });
 
     filtersByValues.addEventListener('click', (event) => this.controller.applyFilter(event));
+
+    window.onbeforeunload = () => this.controller.saveSettings();
   }
 }
 
