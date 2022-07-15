@@ -90,6 +90,57 @@ class AppController {
     this.itemsRequest.years = { min, max };
     this.view.render(this.model.getItems(this.itemsRequest), this.selectedItems, this.sortingMode, this.searchString);
   }
+
+  applyFilter(event: MouseEvent): void {
+    if (!event.target || !event.currentTarget) return;
+
+    let target = event.target as HTMLElement;
+    const filterGroup = event.currentTarget as HTMLElement;
+
+    while (target !== filterGroup) {
+      if (target.classList.contains('btn')) {
+        const filterType = target.dataset.type || '';
+
+        if (filterType === 'manufacturer') {
+          const manufacturer = target.innerText.toLowerCase();
+
+          if (this.itemsRequest.manufacturers.has(manufacturer)) {
+            this.itemsRequest.manufacturers.delete(manufacturer);
+            target.classList.remove('active');
+          } else {
+            this.itemsRequest.manufacturers.add(manufacturer);
+            target.classList.add('active');
+          }
+        }
+
+        if (filterType === 'cams') {
+          const cams = parseInt(target.innerText);
+
+          if (isNaN(cams)) return;
+
+          if (this.itemsRequest.cams.has(cams)) {
+            this.itemsRequest.cams.delete(cams);
+            target.classList.remove('active');
+          } else {
+            this.itemsRequest.cams.add(cams);
+            target.classList.add('active');
+          }
+        }
+
+        this.view.render(
+          this.model.getItems(this.itemsRequest),
+          this.selectedItems,
+          this.sortingMode,
+          this.searchString
+        );
+
+        return;
+      }
+      if (!target.parentNode) return;
+
+      target = target.parentNode as HTMLElement;
+    }
+  }
 }
 
 export default AppController;

@@ -19,7 +19,12 @@ export class AppModel {
   }
 
   getItems(request: IItemsRequest): Array<IItem> {
-    this.currentItems = AppModel.applyRangeFilters(this.items, request.qty, request.years);
+    this.currentItems = this.items.slice();
+
+    if (request.manufacturers.size)
+      this.currentItems = AppModel.applyFilterByManufacturers(this.currentItems, request.manufacturers);
+    if (request.cams.size) this.currentItems = AppModel.applyFilterByCams(this.currentItems, request.cams);
+    this.currentItems = AppModel.applyRangeFilters(this.currentItems, request.qty, request.years);
     return this.currentItems;
   }
 
@@ -31,6 +36,14 @@ export class AppModel {
     return array.filter(
       (item) => item.quantity >= qty.min && item.quantity <= qty.max && item.year >= years.min && item.year <= years.max
     );
+  }
+
+  static applyFilterByManufacturers(array: Array<IItem>, manufacturers: Set<string>): Array<IItem> {
+    return array.filter((item) => manufacturers.has(item.manufacturer.toLocaleLowerCase()));
+  }
+
+  static applyFilterByCams(array: Array<IItem>, cams: Set<number>): Array<IItem> {
+    return array.filter((item) => cams.has(item.cams));
   }
 }
 

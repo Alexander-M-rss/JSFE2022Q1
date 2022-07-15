@@ -31,6 +31,7 @@ class App {
     const selectSorting = document.querySelector<HTMLSelectElement>('.sorting-type-select');
     const searchInput = document.querySelector<HTMLInputElement>('.search');
     const searchClearBtn = document.querySelector<HTMLButtonElement>('.clear');
+    const filtersByValues = document.querySelector<HTMLDivElement>('.filters-by-values');
 
     if (
       !qtySlider ||
@@ -42,7 +43,8 @@ class App {
       !itemsList ||
       !selectSorting ||
       !searchInput ||
-      !searchClearBtn
+      !searchClearBtn ||
+      !filtersByValues
     )
       throw new Error('index.html is damaged');
 
@@ -115,6 +117,8 @@ class App {
       }
       this.controller.applySearch(searchInput.value);
     });
+
+    filtersByValues.addEventListener('click', (event) => this.controller.applyFilter(event));
   }
 }
 
