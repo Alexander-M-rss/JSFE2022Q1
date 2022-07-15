@@ -26,6 +26,10 @@ class App {
       itemsList,
       basketCounter,
       BASKET_COUNTER_MAX,
+      QTY_MIN,
+      QTY_MAX,
+      YEAR_MIN,
+      YEAR_MAX,
       popup,
       popupCloseBtn,
       btns,
@@ -44,6 +48,8 @@ class App {
     const searchInput = document.querySelector<HTMLInputElement>('.search');
     const searchClearBtn = document.querySelector<HTMLButtonElement>('.clear');
     const filtersByValues = document.querySelector<HTMLDivElement>('.filters-by-values');
+    const resetFiltersBtn = document.querySelector<HTMLButtonElement>('.filter-reset');
+    const resetSettingsBtn = document.querySelector<HTMLButtonElement>('.settings-reset');
 
     if (
       !qtySlider ||
@@ -56,15 +62,11 @@ class App {
       !selectSorting ||
       !searchInput ||
       !searchClearBtn ||
-      !filtersByValues
+      !filtersByValues ||
+      !resetFiltersBtn ||
+      !resetSettingsBtn
     )
       throw new Error('index.html is damaged');
-
-    const [qtySliderStart, qtySliderEnd] = [this.controller.itemsRequest.qty.min, this.controller.itemsRequest.qty.max];
-    const [yearSliderStart, yearSliderEnd] = [
-      this.controller.itemsRequest.years.min,
-      this.controller.itemsRequest.years.max,
-    ];
 
     noUiSlider.create(qtySlider, {
       range: {
@@ -72,7 +74,7 @@ class App {
         max: QTY_MAX,
       },
       step: 1,
-      start: [qtySliderStart, qtySliderEnd],
+      start: [this.controller.itemsRequest.qty.min, this.controller.itemsRequest.qty.max],
       connect: true,
       tooltips: { to: (x) => Math.trunc(x) },
     });
@@ -83,23 +85,39 @@ class App {
         max: YEAR_MAX,
       },
       step: 1,
-      start: [yearSliderStart, yearSliderEnd],
+      start: [this.controller.itemsRequest.years.min, this.controller.itemsRequest.years.max],
       connect: true,
       tooltips: { to: (x) => Math.trunc(x) },
     });
 
-    qtyLow.innerText = qtySliderStart.toString();
-    qtyHi.innerText = qtySliderEnd.toString();
-    yearLow.innerText = yearSliderStart.toString();
-    yearHi.innerText = yearSliderEnd.toString();
-    selectSorting.value = this.controller.sortingMode.toString();
-
-    if (this.controller.searchString.length) {
-      searchClearBtn.classList.remove('hidden');
-      searchInput.classList.add('not-empty');
+    const setSettings = (): void => {
+      qtyLow.innerText = this.controller.itemsRequest.qty.min.toString();
+      qtyHi.innerText = this.controller.itemsRequest.qty.max.toString();
+      yearLow.innerText = this.controller.itemsRequest.years.min.toString();
+      yearHi.innerText = this.controller.itemsRequest.years.max.toString();
+      selectSorting.value = this.controller.sortingMode.toString();
+      if (this.controller.searchString.length) {
+        searchClearBtn.classList.remove('hidden');
+        searchInput.classList.add('not-empty');
+      } else {
+        searchClearBtn.classList.add('hidden');
+        searchInput.classList.remove('not-empty');
+      }
       searchInput.value = this.controller.searchString;
-    }
+    };
 
+    const setSlidersHandles = (): void => {
+      (qtySlider as noUiSlider.target).noUiSlider?.set([
+        this.controller.itemsRequest.qty.min,
+        this.controller.itemsRequest.qty.max,
+      ]);
+      (yearSlider as noUiSlider.target).noUiSlider?.set([
+        this.controller.itemsRequest.years.min,
+        this.controller.itemsRequest.years.max,
+      ]);
+    };
+
+    setSettings();
     this.controller.start();
 
     (qtySlider as noUiSlider.target).noUiSlider?.on('set', () => {
@@ -146,6 +164,20 @@ class App {
     });
 
     filtersByValues.addEventListener('click', (event) => this.controller.applyFilter(event));
+
+    resetFiltersBtn.addEventListener('click', () => {
+      this.controller.resetFilters();
+      setSettings();
+      setSlidersHandles();
+      this.controller.start();
+    });
+
+    resetSettingsBtn.addEventListener('click', () => {
+      this.controller.resetSettings();
+      setSettings();
+      setSlidersHandles();
+      this.controller.start();
+    });
 
     window.onbeforeunload = () => this.controller.saveSettings();
   }

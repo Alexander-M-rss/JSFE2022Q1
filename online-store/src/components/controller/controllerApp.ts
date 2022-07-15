@@ -11,14 +11,22 @@ class AppController {
   selectedItems: Set<number>;
   searchString: string;
   sortingMode: SORTING_TYPE;
-  basketCounterMax: number;
+  BASKET_COUNTER_MAX: number;
+  QTY_MIN: number;
+  QTY_MAX: number;
+  YEAR_MIN: number;
+  YEAR_MAX: number;
   settingsLoaded: boolean;
 
   constructor(
     data: Array<IItem>,
     view: HTMLDivElement,
     basketCounter: HTMLSpanElement,
-    basketCounterMax: number,
+    BASKET_COUNTER_MAX: number,
+    QTY_MIN: number,
+    QTY_MAX: number,
+    YEAR_MIN: number,
+    YEAR_MAX: number,
     popup: HTMLDivElement,
     popupCloseBtn: HTMLButtonElement,
     btns: NodeListOf<HTMLButtonElement>,
@@ -31,14 +39,18 @@ class AppController {
       cams: new Set<number>(null),
       colors: new Set<string>(null),
       favorite: false,
-      qty: { min: 1, max: 12 },
-      years: { min: 2000, max: 2022 },
+      qty: { min: QTY_MIN, max: QTY_MAX },
+      years: { min: YEAR_MIN, max: YEAR_MAX },
     };
 
     this.selectedItems = new Set<number>(null);
     this.sortingMode = 1;
     this.searchString = '';
-    this.basketCounterMax = basketCounterMax;
+    this.BASKET_COUNTER_MAX = BASKET_COUNTER_MAX;
+    this.QTY_MIN = QTY_MIN;
+    this.QTY_MAX = QTY_MAX;
+    this.YEAR_MIN = YEAR_MIN;
+    this.YEAR_MAX = YEAR_MAX;
 
     this.settingsLoaded = this.loadSettings();
   }
@@ -70,7 +82,7 @@ class AppController {
         if (this.selectedItems.has(itemId)) {
           this.selectedItems.delete(itemId);
           this.view.selectItem(itemId, false);
-        } else if (this.selectedItems.size < this.basketCounterMax) {
+        } else if (this.selectedItems.size < this.BASKET_COUNTER_MAX) {
           this.selectedItems.add(itemId);
           this.view.selectItem(itemId);
         } else this.view.showBasketOverflowPopup();
@@ -239,6 +251,26 @@ class AppController {
     }
 
     return loaded;
+  }
+
+  resetFilters() {
+    this.itemsRequest.manufacturers.clear();
+    this.itemsRequest.cams.clear();
+    this.itemsRequest.colors.clear();
+    this.itemsRequest.favorite = false;
+    this.itemsRequest.qty.min = this.QTY_MIN;
+    this.itemsRequest.qty.max = this.QTY_MAX;
+    this.itemsRequest.years.min = this.YEAR_MIN;
+    this.itemsRequest.years.max = this.YEAR_MAX;
+    this.searchString = '';
+    this.settingsLoaded = true;
+  }
+
+  resetSettings() {
+    this.resetFilters();
+    this.selectedItems.clear();
+    this.sortingMode = SORTING_TYPE.BY_NAME_ASC;
+    localStorage.clear();
   }
 }
 
