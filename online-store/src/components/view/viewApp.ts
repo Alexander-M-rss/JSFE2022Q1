@@ -80,13 +80,14 @@ export class AppView {
         const index = this.itemsMap.get(i);
         if (index) itemsHTML[index] = AppView.renderItem(items[index], true);
       }
-
+      document.body.classList.remove('body-no-result');
       this.basketCounter.innerHTML = selected.size.toString();
       this.itemsList.innerHTML = itemsHTML.join('');
       this.itemCards = Array.from(document.querySelectorAll('.item'));
       if (searchString.length) this.applySearch(searchString);
       this.itemMarkers = Array.from(document.querySelectorAll('.marker'));
     } else {
+      document.body.classList.add('body-no-result');
       this.itemsList.innerHTML = '<h1 class="no-result">Извините, совпадений не обнаружено</h1>';
       this.itemCards = [];
       this.itemMarkers = [];
@@ -170,7 +171,10 @@ export class AppView {
     if (!this.items.length) return;
 
     if (!search.length) {
-      if (noResultMsg) noResultMsg.remove();
+      if (noResultMsg) {
+        noResultMsg.remove();
+        document.body.classList.remove('body-no-result');
+      }
       this.itemCards.forEach((item) => item.classList.remove('hidden'));
       return;
     }
@@ -179,7 +183,10 @@ export class AppView {
 
     this.itemCards.forEach((item) => item.classList.add('hidden'));
     if (visibleItemsId.length) {
-      if (noResultMsg) noResultMsg.remove();
+      if (noResultMsg) {
+        noResultMsg.remove();
+        document.body.classList.remove('body-no-result');
+      }
       visibleItemsId.forEach((itemId) => {
         const index = this.itemsMap.get(itemId);
         if (index !== undefined) this.itemCards[index].classList.remove('hidden');
@@ -188,6 +195,7 @@ export class AppView {
       const newMsg = document.createElement('h1');
 
       newMsg.classList.add('no-result');
+      document.body.classList.add('body-no-result');
       newMsg.innerHTML = 'Извините, совпадений не обнаружено';
       this.itemsList.append(newMsg);
     }

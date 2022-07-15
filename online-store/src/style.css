@@ -1,7 +1,6 @@
 .body {
   margin: 0;
   height: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: #fff;
@@ -9,6 +8,10 @@
   background: url('./img/bg.jpg') no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+.body-no-result {
+  height: 100vh;
 }
 
 .header {
