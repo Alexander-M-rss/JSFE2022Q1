@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppView.renderItem Should return rendered selected item 1`] = `
+"
+      <div class=\\"item\\" data-item-id=\\"1\\">
+        <h4 class=\\"item-title\\">Samsung Galaxy S21</h4><div class=\\"item-img-container\\">
+          <img src=\\"./img/items/1.jpg\\" alt=\\"Samsung Galaxy S21\\" class=\\"item-img\\">
+        </div>
+        <ul class=\\"item-props\\">
+          <li>Количество: 2</li>
+          <li>Год выхода: 2019</li>
+          <li>Производитель: Samsung</li>
+          <li>Цвет: белый</li>
+          <li>Количество камер: 3</li>
+          <li>Популярный: нет</li>
+        </ul>
+        <div class=\\"marker\\" title=\\"Товар добавлен в корзину\\"></div>
+      </div>"
+`;
+
+exports[`AppView.renderItem Should return rendered unselected item 1`] = `
+"
+      <div class=\\"item\\" data-item-id=\\"1\\">
+        <h4 class=\\"item-title\\">Samsung Galaxy S21</h4><div class=\\"item-img-container\\">
+          <img src=\\"./img/items/1.jpg\\" alt=\\"Samsung Galaxy S21\\" class=\\"item-img\\">
+        </div>
+        <ul class=\\"item-props\\">
+          <li>Количество: 2</li>
+          <li>Год выхода: 2019</li>
+          <li>Производитель: Samsung</li>
+          <li>Цвет: белый</li>
+          <li>Количество камер: 3</li>
+          <li>Популярный: нет</li>
+        </ul>
+        <div class=\\"marker hidden\\" title=\\"Товар добавлен в корзину\\"></div>
+      </div>"
+`;
