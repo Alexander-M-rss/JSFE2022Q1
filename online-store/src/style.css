@@ -1,5 +1,6 @@
 .body {
   margin: 0;
+  min-width: 320px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -585,8 +586,36 @@ footer .link:hover {
   opacity: 1;
 }
 
-@media screen and (max-width: 1422px) {
+@media screen and (max-width: 1425px) {
   .items-list {
     grid-template-columns: [raw-start] repeat(4,1fr) [raw-end];
+  }
+}
+
+@media screen and (max-width: 1135px) {
+  .items-list {
+    grid-template-columns: [raw-start] repeat(3,1fr) [raw-end];
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .body-no-result {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 785px) {
+  .items-list {
+    grid-template-columns: [raw-start] repeat(2,1fr) [raw-end];
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .items-list {
+    grid-template-columns: [raw-start] repeat(1,1fr) [raw-end];
   }
 }
