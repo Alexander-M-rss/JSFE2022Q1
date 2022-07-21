@@ -78,7 +78,7 @@ export class AppView {
 
       for (const i of selected) {
         const index = this.itemsMap.get(i);
-        if (index) itemsHTML[index] = AppView.renderItem(items[index], true);
+        if (index !== undefined) itemsHTML[index] = AppView.renderItem(items[index], true);
       }
       document.body.classList.remove('body-no-result');
       this.basketCounter.innerHTML = selected.size.toString();
