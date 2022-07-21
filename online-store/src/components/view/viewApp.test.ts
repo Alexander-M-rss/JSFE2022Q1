@@ -283,7 +283,7 @@ describe('AppView.sortByNameDesc', () => {
     expect(AppView.sortByNameDesc).toBeInstanceOf(Function);
   });
 
-  it('Should return sorted by ascending name array of items', () => {
+  it('Should return sorted by descending name array of items', () => {
     expect(AppView.sortByNameDesc(data.slice())).toEqual(dataSortedByNameAsc.reverse());
   });
 });
@@ -293,7 +293,7 @@ describe('AppView.sortByYearAsc', () => {
     expect(AppView.sortByYearAsc).toBeInstanceOf(Function);
   });
 
-  it('Should return sorted by descending year array of items', () => {
+  it('Should return sorted by ascending year array of items', () => {
     expect(AppView.sortByYearAsc(data.slice())).toEqual(dataSortedByYearAsc);
   });
 });
@@ -323,7 +323,7 @@ describe('AppView.sortByQtyDesc', () => {
     expect(AppView.sortByQtyDesc).toBeInstanceOf(Function);
   });
 
-  it('Should return sorted by ascending quantity array of items', () => {
+  it('Should return sorted by descending quantity array of items', () => {
     expect(AppView.sortByQtyDesc(data.slice())).toEqual(dataSortedByQtyAsc.reverse());
   });
 });

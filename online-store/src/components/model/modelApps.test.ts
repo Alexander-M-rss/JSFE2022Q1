@@ -162,7 +162,7 @@ describe('AppModel.applyFilterByCams', () => {
     expect(AppModel.applyFilterByManufacturers).toBeInstanceOf(Function);
   });
 
-  it('Should return array of items manufactured by Xiaomi', () => {
+  it('Should return array of items with 2 cameras', () => {
     expect(AppModel.applyFilterByCams(data.slice(), cams)).toEqual(dataFilteredBy2Cams);
   });
 });
