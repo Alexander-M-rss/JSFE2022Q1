@@ -254,12 +254,7 @@ const dataSortedByQtyAsc: IItem[] = [
 ];
 
 describe('AppView.renderItem', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.renderItem).toBeInstanceOf(Function);
-  });
-
   it('Should return rendered unselected item', () => {
-    //
     expect(AppView.renderItem(data[0])).toMatchSnapshot();
   });
 
@@ -269,70 +264,42 @@ describe('AppView.renderItem', () => {
 });
 
 describe('AppView.sortByNameAsc', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.sortByNameAsc).toBeInstanceOf(Function);
-  });
-
   it('Should return sorted by ascending name array of items', () => {
     expect(AppView.sortByNameAsc(data.slice())).toEqual(dataSortedByNameAsc);
   });
 });
 
 describe('AppView.sortByNameDesc', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.sortByNameDesc).toBeInstanceOf(Function);
-  });
-
   it('Should return sorted by descending name array of items', () => {
     expect(AppView.sortByNameDesc(data.slice())).toEqual(dataSortedByNameAsc.reverse());
   });
 });
 
 describe('AppView.sortByYearAsc', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.sortByYearAsc).toBeInstanceOf(Function);
-  });
-
   it('Should return sorted by ascending year array of items', () => {
     expect(AppView.sortByYearAsc(data.slice())).toEqual(dataSortedByYearAsc);
   });
 });
 
 describe('AppView.sortByYearDesc', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.sortByYearDesc).toBeInstanceOf(Function);
-  });
-
   it('Should return sorted by descending year array of items', () => {
     expect(AppView.sortByYearDesc(data.slice())).toEqual(dataSortedByYearAsc.reverse());
   });
 });
 
 describe('AppView.sortByQtyAsc', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.sortByQtyAsc).toBeInstanceOf(Function);
-  });
-
   it('Should return sorted by ascending quantity array of items', () => {
     expect(AppView.sortByQtyAsc(data.slice())).toEqual(dataSortedByQtyAsc);
   });
 });
 
 describe('AppView.sortByQtyDesc', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.sortByQtyDesc).toBeInstanceOf(Function);
-  });
-
   it('Should return sorted by descending quantity array of items', () => {
     expect(AppView.sortByQtyDesc(data.slice())).toEqual(dataSortedByQtyAsc.reverse());
   });
 });
 
 describe('AppView.filterByName', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppView.filterByName).toBeInstanceOf(Function);
-  });
-
   it('Should return array of visible items Ids filtered by names containing "aom" substring', () => {
     expect(AppView.filterByName(data, 'aom')).toEqual([4, 5]);
   });

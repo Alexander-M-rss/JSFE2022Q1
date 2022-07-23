@@ -148,31 +148,19 @@ const cams = new Set([2]);
 const colors = new Set(['красный', 'желтый']);
 
 describe('AppModel.applyFilterByManufacturers', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppModel.applyFilterByManufacturers).toBeInstanceOf(Function);
-  });
-
   it('Should return array of items manufactured by Xiaomi', () => {
-    expect(AppModel.applyFilterByManufacturers(data.slice(), manufacturers)).toEqual(dataFilteredByXiaomi);
+    expect(AppModel.applyFilterByManufacturers(data, manufacturers)).toEqual(dataFilteredByXiaomi);
   });
 });
 
 describe('AppModel.applyFilterByCams', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppModel.applyFilterByManufacturers).toBeInstanceOf(Function);
-  });
-
   it('Should return array of items with 2 cameras', () => {
-    expect(AppModel.applyFilterByCams(data.slice(), cams)).toEqual(dataFilteredBy2Cams);
+    expect(AppModel.applyFilterByCams(data, cams)).toEqual(dataFilteredBy2Cams);
   });
 });
 
 describe('AppModel.applyFilterByColors', () => {
-  it('Should be an instance of Function', () => {
-    expect(AppModel.applyFilterByManufacturers).toBeInstanceOf(Function);
-  });
-
   it('Should return array of red and yellow items', () => {
-    expect(AppModel.applyFilterByColors(data.slice(), colors)).toEqual(dataFilteredByRedYellowColors);
+    expect(AppModel.applyFilterByColors(data, colors)).toEqual(dataFilteredByRedYellowColors);
   });
 });
