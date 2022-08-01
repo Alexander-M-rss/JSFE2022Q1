@@ -1,12 +1,17 @@
 const BASE_URL = 'http://127.0.0.1:3000';
 const GARAGE_URL = `${BASE_URL}/garage`;
 const ENGINE_URL = `${BASE_URL}/engine`;
-// const WINNERS_URL = `${BASE_URL}/winners`;
+const WINNERS_URL = `${BASE_URL}/winners`;
 
 export interface Car {
   name: string;
   color: string;
   id: number;
+}
+
+export interface Winner extends Car {
+  wins: number;
+  time: number;
 }
 
 export interface MoveParams {
@@ -15,6 +20,8 @@ export interface MoveParams {
 }
 
 export type EngineStatus = 'started' | 'stopped' | 'drive';
+export type SortModes = 'id' | 'wins' | 'time' | null;
+export type SortOrders = 'asc' | 'desc' | null;
 
 export const getCars = async (page: number, limit: number) => {
   const response = await fetch(`${GARAGE_URL}?_page=${page}&_limit=${limit}`);
@@ -74,4 +81,75 @@ export const changeEngineStatus = async (id: number, status: EngineStatus) => {
     return response.status;
   }
   return (await response.json()) as MoveParams;
+};
+
+export const getWinners = async (
+  page: number,
+  limit: number,
+  sort?: SortModes,
+  order?: SortOrders,
+) => {
+  const sortParams = sort && order ? `&_sort=${sort}&_order=${order}` : '';
+  const response = await fetch(`${WINNERS_URL}?_page=${page}&_limit=${limit}${sortParams}`);
+  let winners = (await response.json()) as Array<Winner>;
+
+  winners = await Promise.all(
+    winners.map(async (winner) => {
+      const car = await getCar(winner.id);
+
+      return {
+        ...winner,
+        name: car.name,
+        color: car.color,
+      };
+    }),
+  );
+
+  return {
+    winners,
+    winnersNumber: +(response.headers.get('X-Total-Count') || winners.length),
+  };
+};
+
+export const getWinner = async (id: number) => {
+  const response = await fetch(`${WINNERS_URL}/${id}`);
+  const winner = (await response.json()) as Winner;
+
+  return winner;
+};
+
+export const createWinner = async (id: number, time: number, wins = 1) => {
+  const data = { id, time, wins };
+
+  return (
+    await fetch(`${WINNERS_URL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+  ).status;
+};
+
+export const deleteWinner = async (id: number) => {
+  const respone = await fetch(`${WINNERS_URL}/${id}`, {
+    method: 'DELETE',
+  });
+
+  return respone.status;
+};
+
+export const updateWinner = async (id: number, time: number, wins = 1) => {
+  const data = { id, time, wins };
+
+  return (
+    await fetch(`${WINNERS_URL}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+  ).status;
 };
