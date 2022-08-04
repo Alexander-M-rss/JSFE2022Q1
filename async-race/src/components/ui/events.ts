@@ -1,17 +1,24 @@
 import render, { renderGarage, renderWinnersViewContent } from './render';
 import store, { updateGarageState, updateWinnersState } from '../store/store';
-import { SortModes } from '../api/api';
+import { getCar, SortModes } from '../api/api';
 
 let winnersView: HTMLDivElement | null;
 let garageView: HTMLDivElement | null;
 let prevBtn: HTMLButtonElement | null;
 let nextBtn: HTMLButtonElement | null;
+let updateName: HTMLInputElement | null;
+let updateColor: HTMLInputElement | null;
+let updateSubmit: HTMLButtonElement | null;
+let selectedCar = null;
 
 const getHTMLElements = () => {
   garageView = document.querySelector<HTMLDivElement>('#garage-view');
   winnersView = document.querySelector<HTMLDivElement>('#winners-view');
   prevBtn = document.querySelector<HTMLButtonElement>('#prev');
   nextBtn = document.querySelector<HTMLButtonElement>('#next');
+  updateName = document.querySelector<HTMLInputElement>('#update-name');
+  updateColor = document.querySelector<HTMLInputElement>('#update-color');
+  updateSubmit = document.querySelector<HTMLButtonElement>('#update-submit');
 };
 
 export const setPaginationBtnsState = (
@@ -130,9 +137,28 @@ const handleTableEvent = async (event: MouseEvent) => {
   return false;
 };
 
+const handleCarBtnsEvent = async (event: MouseEvent) => {
+  const target = event.target as Element;
+
+  if (!target || !updateName || !updateColor || !updateSubmit) throw new Error('Error in HTML');
+
+  if (target.classList.contains('select-btn')) {
+    const id = +target.id.split('select-car-')[1];
+    selectedCar = await getCar(id);
+    updateName.value = selectedCar.name;
+    updateColor.value = selectedCar.color;
+    updateName.disabled = false;
+    updateColor.disabled = false;
+    updateSubmit.disabled = false;
+    return true;
+  }
+  return false;
+};
+
 const setEventsHandlers = () => {
   document.body.addEventListener('click', async (event) => {
     if (await handleMenuEvent(event)
+      || await handleCarBtnsEvent(event)
       || await handlePaginationEvent(event)
     ) return;
     await handleTableEvent(event);
