@@ -32,7 +32,12 @@ const store: Storage = {
   WINNERS_PER_PAGE: 10,
 };
 
-const { cars, carsNumber } = await getCars(store.carsPage, store.CARS_PER_PAGE);
+export const updateGarageState = async () => {
+  const { cars, carsNumber } = await getCars(store.carsPage, store.CARS_PER_PAGE);
+
+  store.cars = cars;
+  store.carsNumber = carsNumber;
+};
 
 export const updateWinnersState = async () => {
   const { winners, winnersNumber } = await getWinners(
@@ -45,9 +50,6 @@ export const updateWinnersState = async () => {
   store.winnersNumber = winnersNumber;
 };
 
-await updateWinnersState();
-
-store.cars = cars;
-store.carsNumber = carsNumber;
+await updateGarageState();
 
 export default store;

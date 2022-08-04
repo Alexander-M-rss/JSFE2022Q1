@@ -1,5 +1,5 @@
-import render, { renderWinnersViewContent } from './render';
-import store, { updateWinnersState } from '../store/store';
+import render, { renderGarage, renderWinnersViewContent } from './render';
+import store, { updateGarageState, updateWinnersState } from '../store/store';
 
 let winnersView: HTMLDivElement | null;
 let garageView: HTMLDivElement | null;
@@ -13,7 +13,7 @@ const getHTMLElements = () => {
   nextBtn = document.querySelector<HTMLButtonElement>('#next');
 };
 
-export const setPanginationBtnsState = (
+export const setPaginationBtnsState = (
   page: number,
   itemsPerPage: number,
   itemsNumber: number,
@@ -32,10 +32,18 @@ export const setPanginationBtnsState = (
   }
 };
 
+const updateGarage = async () => {
+  const garage = document.getElementById('garage') as HTMLDivElement;
+  if (!garage) throw new Error('Error in HTML');
+  await updateGarageState();
+  setPaginationBtnsState(store.carsPage, store.CARS_PER_PAGE, store.carsNumber);
+  garage.innerHTML = renderGarage();
+};
+
 const updateWinners = async () => {
   if (!winnersView) throw new Error('Error in HTML');
   await updateWinnersState();
-  setPanginationBtnsState(store.winnersPage, store.WINNERS_PER_PAGE, store.winnersNumber);
+  setPaginationBtnsState(store.winnersPage, store.WINNERS_PER_PAGE, store.winnersNumber);
   winnersView.innerHTML = renderWinnersViewContent();
 };
 
@@ -60,15 +68,56 @@ const handleMenuEvent = async (event: MouseEvent) => {
   return false;
 };
 
+const handlePaginationEvent = async (event: MouseEvent) => {
+  const target = event.target as Element;
+
+  if (!target) throw new Error('Error in HTML');
+  if (target.classList.contains('next-btn')) {
+    switch (store.view) {
+      case 'garage': {
+        store.carsPage += 1;
+        await updateGarage();
+        break;
+      }
+      case 'winners': {
+        store.winnersPage += 1;
+        await updateWinners();
+        break;
+      }
+      default: return false;
+    }
+    return true;
+  }
+  if (target.classList.contains('prev-btn')) {
+    switch (store.view) {
+      case 'garage': {
+        store.carsPage -= 1;
+        await updateGarage();
+        break;
+      }
+      case 'winners': {
+        store.winnersPage -= 1;
+        await updateWinners();
+        break;
+      }
+      default: return false;
+    }
+    return true;
+  }
+  return false;
+};
+
 const setEventsHandlers = () => {
   document.body.addEventListener('click', async (event) => {
-    await handleMenuEvent(event);
+    if (await handleMenuEvent(event)) return;
+    await handlePaginationEvent(event);
   });
 };
 
 const start = () => {
   render();
   getHTMLElements();
+  setPaginationBtnsState(store.carsPage, store.CARS_PER_PAGE, store.carsNumber);
   setEventsHandlers();
 };
 

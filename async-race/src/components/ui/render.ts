@@ -43,9 +43,9 @@ const renderCar = ({ id, name, color }: Car) => `
   </div>
 `;
 
-const renderGarage = () => `
+export const renderGarage = () => `
   <h1>Garage (${store.carsNumber})</h1>
-  <h2>Page #${store.carsPage}</h2>
+  <h2>Page # ${store.carsPage} / ${Math.ceil(store.carsNumber / store.CARS_PER_PAGE)}</h2>
   <ul class="garage">
     ${store.cars.map((car) => `
       <li>${renderCar(car)}</li>
@@ -81,7 +81,7 @@ const renderGarageViewContent = () => `
 
 export const renderWinnersViewContent = () => `
   <h1>Winners (${store.winnersNumber})</h1>
-  <h2>Page #${store.winnersPage}</h2>
+  <h2>Page # ${store.winnersPage} / ${Math.ceil(store.winnersNumber / store.WINNERS_PER_PAGE)}</h2>
   <table class="table" cellspacing="0" border="0" cellpadding="0">
     <thead>
       <th>Number</th>
@@ -93,7 +93,7 @@ export const renderWinnersViewContent = () => `
     <tbody>
       ${store.winners.map((winner, i) => `
         <tr>
-          <td>${i + 1}</td>
+          <td>${(store.winnersPage - 1) * 10 + i + 1}</td>
           <td>${getCarImg(winner.color)}</td>
           <td>${winner.name}</td>
           <td>${winner.wins}</td>
