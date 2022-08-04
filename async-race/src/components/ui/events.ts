@@ -1,6 +1,8 @@
 import render, { renderGarage, renderWinnersViewContent } from './render';
 import store, { updateGarageState, updateWinnersState } from '../store/store';
-import { getCar, SortModes } from '../api/api';
+import {
+  getCar, deleteCar, deleteWinner, SortModes,
+} from '../api/api';
 
 let winnersView: HTMLDivElement | null;
 let garageView: HTMLDivElement | null;
@@ -150,6 +152,13 @@ const handleCarBtnsEvent = async (event: MouseEvent) => {
     updateName.disabled = false;
     updateColor.disabled = false;
     updateSubmit.disabled = false;
+    return true;
+  }
+  if (target.classList.contains('remove-btn')) {
+    const id = +target.id.split('remove-car-')[1];
+    await deleteCar(id);
+    await deleteWinner(id);
+    await updateGarage();
     return true;
   }
   return false;
