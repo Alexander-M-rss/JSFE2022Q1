@@ -1,5 +1,5 @@
 import './style.css';
 
-import store from './components/store/store';
+import start from './components/ui/events';
 
-console.log(store);
+start();
