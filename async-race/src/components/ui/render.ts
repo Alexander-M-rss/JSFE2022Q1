@@ -79,14 +79,42 @@ const renderGarageViewContent = () => `
   </div>
 `;
 
+const renderWinnersViewContent = () => `
+  <h1>Winners (${store.winnersNumber})</h1>
+  <h2>Page #${store.winnersPage}</h2>
+  <table class="table" cellspacing="0" border="0" cellpadding="0">
+    <thead>
+      <th>Number</th>
+      <th>Car</th>
+      <th>Name</th>
+      <th class="table-btn table-wins ${store.sortBy === 'wins' ? store.sortOrder : ''}">Wins</th>
+      <th class="table-btn table-time ${store.sortBy === 'time' ? store.sortOrder : ''}">Best time</th>
+    </thead>
+    <tbody>
+      ${store.winners.map((winner, i) => `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${getCarImg(winner.color)}</td>
+          <td>${winner.name}</td>
+          <td>${winner.wins}</td>
+          <td>${winner.time}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+`;
+
 const render = () => {
   const html = `
     <div class="menu">
       <button class="btn garage-menu-btn primary">Garage</button>
       <button class="btn winners-menu-btn primary">Winners</button>
     </div>
-    <div id="garage-view">
+    <div id="garage-view" style="display: none">
       ${renderGarageViewContent()}
+    </div>
+    <div id="winners-view" >
+      ${renderWinnersViewContent()}
     </div>
     <div class="pagination">
       <button class="btn prev-btn" id="prev" disabled>Prev</button>
