@@ -137,10 +137,24 @@
 }
 
 .table th, .table td {
-  font-size: 24px;
+  height: 62px;
   padding: 10px;
+  font-size: 24px;
 }
 
 .table th {
   background: rgb(50, 70, 250);
+}
+
+.table-btn {
+  user-select: none;
+  cursor: pointer;
+}
+
+.table-btn.asc::after {
+  content: '🠕';
+}
+
+.table-btn.desc::after {
+  content: '🠗';
 }
