@@ -79,7 +79,7 @@ const renderGarageViewContent = () => `
   </div>
 `;
 
-const renderWinnersViewContent = () => `
+export const renderWinnersViewContent = () => `
   <h1>Winners (${store.winnersNumber})</h1>
   <h2>Page #${store.winnersPage}</h2>
   <table class="table" cellspacing="0" border="0" cellpadding="0">
@@ -110,10 +110,10 @@ const render = () => {
       <button class="btn garage-menu-btn primary">Garage</button>
       <button class="btn winners-menu-btn primary">Winners</button>
     </div>
-    <div id="garage-view" style="display: none">
+    <div id="garage-view" >
       ${renderGarageViewContent()}
     </div>
-    <div id="winners-view" >
+    <div id="winners-view" style="display: none">
       ${renderWinnersViewContent()}
     </div>
     <div class="pagination">
