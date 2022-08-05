@@ -40,8 +40,7 @@ export const getCar = async (id: number) => {
   return car;
 };
 
-export const createCar = async (name: string, color: string) => {
-  const data = { name, color };
+export const createCar = async (data: Omit<ICar, 'id'>) => {
   const response = await fetch(`${GARAGE_URL}`, {
     method: 'POST',
     headers: {
