@@ -3,18 +3,18 @@ const GARAGE_URL = `${BASE_URL}/garage`;
 const ENGINE_URL = `${BASE_URL}/engine`;
 const WINNERS_URL = `${BASE_URL}/winners`;
 
-export interface Car {
+export interface ICar {
   name: string;
   color: string;
   id: number;
 }
 
-export interface Winner extends Car {
+export interface IWinner extends ICar {
   wins: number;
   time: number;
 }
 
-export interface MoveParams {
+export interface IMoveParams {
   velocity: number;
   distance: number;
 }
@@ -25,7 +25,7 @@ export type SortOrders = 'asc' | 'desc' | null;
 
 export const getCars = async (page: number, limit: number) => {
   const response = await fetch(`${GARAGE_URL}?_page=${page}&_limit=${limit}`);
-  const cars = (await response.json()) as Array<Car>;
+  const cars = (await response.json()) as Array<ICar>;
 
   return {
     cars,
@@ -35,7 +35,7 @@ export const getCars = async (page: number, limit: number) => {
 
 export const getCar = async (id: number) => {
   const response = await fetch(`${GARAGE_URL}/${id}`);
-  const car = (await response.json()) as Car;
+  const car = (await response.json()) as ICar;
 
   return car;
 };
@@ -80,7 +80,7 @@ export const changeEngineStatus = async (id: number, status: EngineStatus) => {
   if (status === 'drive') {
     return response.status;
   }
-  return (await response.json()) as MoveParams;
+  return (await response.json()) as IMoveParams;
 };
 
 export const getWinners = async (
@@ -91,7 +91,7 @@ export const getWinners = async (
 ) => {
   const sortParams = sort && order ? `&_sort=${sort}&_order=${order}` : '';
   const response = await fetch(`${WINNERS_URL}?_page=${page}&_limit=${limit}${sortParams}`);
-  let winners = (await response.json()) as Array<Winner>;
+  let winners = (await response.json()) as Array<IWinner>;
 
   winners = await Promise.all(
     winners.map(async (winner) => {
@@ -113,7 +113,7 @@ export const getWinners = async (
 
 export const getWinner = async (id: number) => {
   const response = await fetch(`${WINNERS_URL}/${id}`);
-  const winner = (await response.json()) as Winner;
+  const winner = (await response.json()) as IWinner;
 
   return winner;
 };

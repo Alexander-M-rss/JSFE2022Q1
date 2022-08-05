@@ -1,6 +1,6 @@
 import './render.css';
 import store from '../store/store';
-import { Car } from '../api/api';
+import { ICar } from '../api/api';
 
 const getCarImg = (color: string) => `
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" "="" viewBox="0 5 20 20" preserveAspectRatio="xMinYMin slice" x="0" y="0" width="73" height="33">
@@ -23,7 +23,7 @@ const getCarImg = (color: string) => `
 </svg>
 `;
 
-const renderCar = ({ id, name, color }: Car) => `
+const renderCar = ({ id, name, color }: ICar) => `
   <div>
     <button class="btn select-btn" id="select-car-${id}">Select</button>
     <button class="btn remove-btn" id="remove-car-${id}">Remove</button>

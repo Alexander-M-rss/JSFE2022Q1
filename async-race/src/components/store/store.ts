@@ -1,13 +1,13 @@
 import {
-  getCars, getWinners, Car, Winner, SortModes, SortOrders,
+  getCars, getWinners, ICar, IWinner, SortModes, SortOrders,
 } from '../api/api';
 
-interface Storage {
+interface IStore {
   carsPage: number;
-  cars: Array<Car>;
+  cars: Array<ICar>;
   carsNumber: number;
   winnersPage: number;
-  winners: Array<Winner>;
+  winners: Array<IWinner>;
   winnersNumber: number;
   animation: { [id: number]: number };
   view: 'garage' | 'winners';
@@ -17,7 +17,7 @@ interface Storage {
   WINNERS_PER_PAGE: number;
 }
 
-const store: Storage = {
+const store: IStore = {
   carsPage: 1,
   cars: [],
   carsNumber: 0,
