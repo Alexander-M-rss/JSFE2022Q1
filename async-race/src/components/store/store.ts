@@ -9,7 +9,7 @@ interface IStore {
   winnersPage: number;
   winners: Array<IWinner>;
   winnersNumber: number;
-  animation: { [id: number]: number };
+  animation: { [id: number]: { id: number } };
   view: 'garage' | 'winners';
   sortBy: SortModes;
   sortOrder: SortOrders;

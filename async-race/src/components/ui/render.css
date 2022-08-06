@@ -75,7 +75,7 @@
   background: rgb(220, 255, 170);
 }
 
-.start-engine-btn.changing-state {
+.start-engine-btn.btn:disabled.changing-state {
   background: rgb(220, 255, 170);
   transform: scale(0.95);
 }
