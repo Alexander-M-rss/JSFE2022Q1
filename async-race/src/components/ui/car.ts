@@ -1,8 +1,10 @@
-import { getCar, deleteCar, deleteWinner } from '../api/api';
+import {
+  getCar, deleteCar, deleteWinner, ICar,
+} from '../api/api';
 import { elements } from './elements';
 import { updateGarage } from './update';
 
-let selectedCar = null;
+export const selectedCar: ICar = { name: '', color: '', id: 0 };
 
 const handleCarBtnsEvent = async (event: MouseEvent) => {
   const target = event.target as Element;
@@ -11,9 +13,10 @@ const handleCarBtnsEvent = async (event: MouseEvent) => {
 
   if (target.classList.contains('select-btn')) {
     const id = +target.id.split('select-car-')[1];
-    selectedCar = await getCar(id);
-    elements.updateName.value = selectedCar.name;
-    elements.updateColor.value = selectedCar.color;
+    const car = await getCar(id);
+    selectedCar.id = car.id;
+    elements.updateName.value = car.name;
+    elements.updateColor.value = car.color;
     elements.updateName.disabled = false;
     elements.updateColor.disabled = false;
     elements.updateSubmit.disabled = false;

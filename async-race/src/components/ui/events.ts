@@ -1,5 +1,5 @@
 import render from './render';
-import store, { updateGarageState } from '../store/store';
+import store from '../store/store';
 import getHTMLElements from './elements';
 import handleMenuEvent from './menu';
 import handleGeneratorEvent from './generator';
@@ -7,6 +7,7 @@ import handleCarBtnsEvent from './car';
 import handlePaginationEvent from './pagination';
 import setPaginationBtnsState from './paginationBtns';
 import handleTableEvent from './table';
+import handleCreateSubmit, { handleUpdateSubmit } from './forms';
 
 const setEventsHandlers = () => {
   document.body.addEventListener('click', async (event) => {
@@ -16,6 +17,20 @@ const setEventsHandlers = () => {
       || await handlePaginationEvent(event)
     ) return;
     await handleTableEvent(event);
+  });
+
+  const createForm = document.querySelector<HTMLFormElement>('#create');
+  const updateForm = document.querySelector<HTMLFormElement>('#update');
+
+  if (!createForm || !updateForm) throw new Error('Error in HTML');
+
+  createForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    await handleCreateSubmit();
+  });
+  updateForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    await handleUpdateSubmit();
   });
 };
 
