@@ -45,4 +45,24 @@ export const startRide = async (id: number) => {
   return { success, id, duration };
 };
 
+export const stopRide = async (id: number) => {
+  const startBtn = document.querySelector<HTMLButtonElement>(`#start-engine-car-${id}`);
+  const stopBtn = document.querySelector<HTMLButtonElement>(`#stop-engine-car-${id}`);
+  const selectBtn = document.querySelector<HTMLButtonElement>(`#select-car-${id}`);
+  const removeBtn = document.querySelector<HTMLButtonElement>(`#remove-car-${id}`);
+  const car = document.querySelector<HTMLElement>(`#car-${id}`);
+
+  if (!startBtn || !stopBtn || !selectBtn || !removeBtn || !car) throw new Error('Error in HTML');
+
+  stopBtn.disabled = true;
+  stopBtn.classList.add('changing-state');
+  await changeEngineStatus(id, 'stopped');
+  stopBtn.classList.remove('changing-state');
+  if (store.animation[id]) window.cancelAnimationFrame(store.animation[id].id);
+  car.style.transform = 'translateX(0)';
+  startBtn.disabled = false;
+  selectBtn.disabled = false;
+  removeBtn.disabled = false;
+};
+
 export default { startRide };

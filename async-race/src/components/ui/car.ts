@@ -3,7 +3,7 @@ import {
 } from '../api/api';
 import { elements } from './elements';
 import { updateGarage } from './update';
-import { startRide } from './ride';
+import { startRide, stopRide } from './ride';
 
 export const selectedCar: ICar = { name: '', color: '', id: 0 };
 
@@ -33,6 +33,11 @@ const handleCarBtnsEvent = async (event: MouseEvent) => {
   if (target.classList.contains('start-engine-btn')) {
     const id = +target.id.split('start-engine-car-')[1];
     startRide(id);
+    return true;
+  }
+  if (target.classList.contains('stop-engine-btn')) {
+    const id = +target.id.split('stop-engine-car-')[1];
+    stopRide(id);
     return true;
   }
   return false;
