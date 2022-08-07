@@ -111,7 +111,11 @@ export const getWinners = async (
 };
 
 export const getWinner = async (id: number) => {
+  const OK = 200;
   const response = await fetch(`${WINNERS_URL}/${id}`);
+
+  if (response.status !== OK) return null;
+
   const winner = (await response.json()) as IWinner;
 
   return winner;
@@ -151,4 +155,14 @@ export const updateWinner = async (id: number, time: number, wins = 1) => {
       body: JSON.stringify(data),
     })
   ).status;
+};
+
+export const saveWinner = async (id: number, time: number) => {
+  const winner = await getWinner(id);
+
+  if (winner) {
+    await updateWinner(id, time > winner.time ? winner.time : time, winner.wins + 1);
+  } else {
+    await createWinner(id, time);
+  }
 };

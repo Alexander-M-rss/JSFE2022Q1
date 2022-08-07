@@ -64,5 +64,3 @@ export const stopRide = async (id: number) => {
   selectBtn.disabled = false;
   removeBtn.disabled = false;
 };
-
-export default { startRide };

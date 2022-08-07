@@ -6,6 +6,7 @@ interface IElements {
   nextBtn: HTMLButtonElement | null;
   createName: HTMLInputElement | null;
   createColor: HTMLInputElement | null;
+  createSubmit: HTMLButtonElement | null;
   updateName: HTMLInputElement | null;
   updateColor: HTMLInputElement | null;
   updateSubmit: HTMLButtonElement | null;
@@ -19,6 +20,7 @@ export const elements: IElements = {
   nextBtn: null,
   createName: null,
   createColor: null,
+  createSubmit: null,
   updateName: null,
   updateColor: null,
   updateSubmit: null,
@@ -32,6 +34,7 @@ const getHTMLElements = () => {
   elements.nextBtn = document.querySelector<HTMLButtonElement>('#next');
   elements.createName = document.querySelector<HTMLInputElement>('#create-name');
   elements.createColor = document.querySelector<HTMLInputElement>('#create-color');
+  elements.createSubmit = document.querySelector<HTMLButtonElement>('#create-submit');
   elements.updateName = document.querySelector<HTMLInputElement>('#update-name');
   elements.updateColor = document.querySelector<HTMLInputElement>('#update-color');
   elements.updateSubmit = document.querySelector<HTMLButtonElement>('#update-submit');

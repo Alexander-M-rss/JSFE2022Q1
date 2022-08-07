@@ -58,7 +58,7 @@ const renderGarageViewContent = () => `
     <form class="form" id="create">
       <input class="input" id="create-name" name="name" type="text">
       <input class="color" id="create-color" name="color" type="color" value="#4689C8">
-      <button class="btn" type="submit">Create</button>
+      <button class="btn" id="create-submit" type="submit">Create</button>
     </form>
     <form class="form" id="update">
       <input class="input" id="update-name" name="name" type="text" disabled>
@@ -68,7 +68,7 @@ const renderGarageViewContent = () => `
   </div>
   <div class="race-btns">
     <button class="btn race-btn primary" id="race-start">Race</button>
-    <button class="btn reset-btn primary" id="reset-race">Reset</button>
+    <button class="btn reset-btn primary" id="reset-race" disabled>Reset</button>
     <button class="btn generate-btn primary">Generate cars</button>
   </div>
   <div id="garage">

@@ -16,8 +16,3 @@ export const updateWinners = async () => {
   setPaginationBtnsState(store.winnersPage, store.WINNERS_PER_PAGE, store.winnersNumber);
   elements.winnersView.innerHTML = renderWinnersViewContent();
 };
-
-export default {
-  updateGarage,
-  updateWinners,
-};

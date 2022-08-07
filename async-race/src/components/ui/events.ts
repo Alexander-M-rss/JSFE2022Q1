@@ -3,6 +3,7 @@ import store from '../store/store';
 import getHTMLElements from './elements';
 import handleMenuEvent from './menu';
 import handleGeneratorEvent from './generator';
+import handleRaceBtnsEvent from './race';
 import handleCarBtnsEvent from './car';
 import handlePaginationEvent from './pagination';
 import setPaginationBtnsState from './paginationBtns';
@@ -12,6 +13,7 @@ import handleCreateSubmit, { handleUpdateSubmit } from './forms';
 const setEventsHandlers = () => {
   document.body.addEventListener('click', async (event) => {
     if (await handleMenuEvent(event)
+      || await handleRaceBtnsEvent(event)
       || await handleGeneratorEvent(event)
       || await handleCarBtnsEvent(event)
       || await handlePaginationEvent(event)

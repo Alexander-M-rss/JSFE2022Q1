@@ -16,6 +16,7 @@ const handleCarBtnsEvent = async (event: MouseEvent) => {
     const id = +target.id.split('select-car-')[1];
     const car = await getCar(id);
     selectedCar.id = car.id;
+    selectedCar.color = car.color;
     elements.updateName.value = car.name;
     elements.updateColor.value = car.color;
     elements.updateName.disabled = false;
