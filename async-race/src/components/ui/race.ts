@@ -69,22 +69,26 @@ const handleRaceBtnEvent = async (btn: HTMLButtonElement, msg: Element) => {
   if (!resetBtn) throw new Error('Error in HTML');
 
   resetBtn.disabled = false;
-  enableForms();
-  generateBtn.disabled = false;
 };
 
 const handleResetBtnEvent = async (btn: HTMLButtonElement, msg: Element) => {
+  const generateBtn = document.querySelector<HTMLButtonElement>('.generate-btn');
+
+  if (!generateBtn) throw new Error('Error in HTML');
+
   const resetBtn = btn;
   const message = msg;
 
   resetBtn.disabled = true;
-  store.cars.map(({ id }) => stopRide(id));
+  await Promise.allSettled(store.cars.map(({ id }) => stopRide(id)));
   message.classList.remove('visible');
 
   const raceBtn = document.querySelector<HTMLButtonElement>('#race-start');
   if (!raceBtn) throw new Error('Error in HTML');
 
   raceBtn.disabled = false;
+  generateBtn.disabled = false;
+  enableForms();
 };
 
 const handleRaceBtnsEvent = async (event: MouseEvent) => {
