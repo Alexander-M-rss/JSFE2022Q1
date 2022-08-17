@@ -1,0 +1,184 @@
+.menu, .race-btns {
+  margin-bottom: 35px;
+}
+
+.form {
+  width: 360px;
+  height: 35px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.input {
+  width: 200px;
+  height: 24px;
+  border: 0;
+  border-radius: 4px;
+  background: rgb(224, 238, 255);
+  font-size: 14px;
+  padding: 4px;
+}
+
+.color {
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: rgb(224, 238, 255);
+  cursor: pointer;
+}
+
+.btn {
+  width: 100px;
+  padding: 4px;
+  border-radius: 4px;
+  border: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 700;
+  background: rgb(225, 240, 255);
+  cursor: pointer;
+  transition: background-color .3s;
+}
+
+.btn.primary {
+  background: rgb(220, 255, 170);
+}
+
+.btn.primary:hover {
+  background: rgb(120, 200, 5);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn:hover {
+  background: rgb(220, 255, 170);
+}
+
+.generate-btn {
+  width: 150px;
+}
+
+.engine-btns {
+  margin-top: 4px;
+}
+
+.start-engine-btn {
+  background: rgb(120, 200, 5);
+}
+
+.start-engine-btn:hover {
+  background: rgb(220, 255, 170);
+}
+
+.start-engine-btn.btn:disabled.changing-state {
+  background: rgb(220, 255, 170);
+  transform: scale(0.95);
+}
+
+.stop-engine-btn {
+  background: rgb(255, 50, 50);
+}
+
+.stop-engine-btn:hover {
+  background: rgb(255, 150, 50);;
+}
+
+.stop-engine-btn.btn:disabled.changing-state {
+  background: rgb(255, 150, 50);
+  transform: scale(0.95);
+}
+
+.input:disabled, .color:disabled, .btn:disabled, .btn:disabled.primary {
+  background: rgb(130, 140, 150);
+  transform: scale(1);
+  cursor: default;
+}
+
+.garage {
+  margin-top: 25px;
+  margin-bottom: 35px;
+  padding: 0;
+  list-style: none;
+}
+
+.car-name {
+  font-weight: 700;
+  font-size: 20px;
+  padding-left: 20px;
+  color: gold;
+}
+
+.track {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 4px dashed snow;
+}
+
+.garage .car {
+  width: 75px;
+}
+
+.flag {
+  margin-top: -80px;
+  color: yellow;
+  font-size: 80px;
+  transform: translateY(45px) translateX(-40px);
+}
+
+.table {
+  margin: 50px 0;
+}
+
+.table th, .table td {
+  height: 62px;
+  padding: 10px;
+  font-size: 24px;
+}
+
+.table th {
+  background: rgb(50, 70, 250);
+}
+
+.table-btn {
+  user-select: none;
+  cursor: pointer;
+}
+
+.table-btn.asc::after {
+  content: '🠕';
+}
+
+.table-btn.desc::after {
+  content: '🠗';
+}
+
+.message {
+  width: 500px;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: calc(50% - 250px);
+  text-align: center;
+  font-size: 50px;
+  color: red;
+  text-shadow:
+    0 0 7px white,
+    0 0 10px white,
+    0 0 21px white,
+    0 0 42px red,
+    0 0 82px red,
+    0 0 92px red,
+    0 0 102px red,
+    0 0 151px red;
+}
+
+.message.visible {
+  display: block;
+}
